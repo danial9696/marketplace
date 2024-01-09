@@ -1,0 +1,100 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.breakpoint' as *;
+
+// * st stands for sticky
+
+.st-list {
+  width: 100%;
+  max-width: 100%;
+}
+
+.st-list__header {
+  @include flex-center-vertical;
+  overflow: auto;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid var(--st-list-header-border);
+  box-shadow: var(--st-list-header-border);
+
+  &--sticky {
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    padding-top: 8px;
+  }
+}
+
+.st-list__header-item {
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+
+  button {
+    @include flex-center;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--st-list-header-text-color);
+    white-space: nowrap;
+
+    i {
+      font-size: 24px;
+      color: var(--st-list-header-icon-color);
+      margin-left: 8px;
+    }
+
+    &:hover {
+      font-weight: 600;
+
+      i {
+        transform: scale(1.2);
+        color: var(--danger-st-color);
+      }
+    }
+  }
+
+  &--active {
+    border-bottom: 2px solid var(--danger-st-color);
+    border-radius: 2px 2px 0px 0px;
+
+    a {
+      font-weight: 600;
+
+      i {
+        color: var(--danger-st-color);
+      }
+    }
+  }
+}
+
+.st-list__content-title {
+  @include flex-center-vertical;
+  color: var(--st-list-header-content-title-color);
+  text-align: right;
+
+  @include media-up(xxs) {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  @include media-up(md) {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 21px;
+  }
+
+  i {
+    margin-left: 8px;
+    color: var(--danger-st-color);
+
+    @include media-up(xxs) {
+      font-size: 20px;
+    }
+
+    @include media-up(md) {
+      font-size: 24px;
+    }
+  }
+}

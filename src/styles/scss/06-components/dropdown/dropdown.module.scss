@@ -1,0 +1,134 @@
+@use '@styles/02-tools/tools.flex' as *;
+
+.c-dropdown__icon {
+  font-size: 24px;
+  color: var(--white);
+
+  &[data-state='open'] {
+    color: var(--primary-st-color);
+  }
+}
+
+.c-dropdown__content {
+  min-width: 137px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: var(--white);
+  border: 1px solid var(--dropdown-border-color);
+  box-shadow: var(--dropdown-shadow);
+  border-radius: 2px;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.46, 1, 0.5, 1);
+  will-change: transform, opacity;
+
+  &[data-side='top'] {
+    animation-name: slideDownAndFade;
+  }
+
+  &[data-side='right'] {
+    animation-name: slideLeftAndFade;
+  }
+
+  &[data-side='bottom'] {
+    animation-name: slideUpAndFade;
+  }
+
+  &[data-side='left'] {
+    animation-name: slideRightAndFade;
+  }
+}
+
+.c-dropdown__item {
+  padding: 8px;
+  cursor: pointer;
+
+  &[data-highlighted] {
+    background-color: var(--dropdown-hover-color);
+    outline: none;
+  }
+
+  &[data-disabled] {
+    .c-dropdown__item-title,
+    .c-dropdown__item-detail {
+      color: var(--dropdown-title-disabled-color);
+    }
+
+    i {
+      color: var(--dropdown-icon-disabled-color);
+    }
+  }
+
+  &:first-child {
+    padding-top: 16px;
+  }
+
+  i {
+    margin-left: 8px;
+  }
+}
+
+.c-dropdown__item-title {
+  @include flex-center-vertical;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--dropdown-title-color);
+}
+
+.c-dropdown__item-detail {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  color: var(--dropdown-detail-color);
+  margin-right: 16px;
+  margin-top: 4px;
+}
+
+.c-dropdown__loading {
+  @include flex-center;
+  margin: 56px 0;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

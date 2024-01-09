@@ -1,0 +1,9 @@
+/* The `@use` directive is used in SCSS to import and use functionality from other SCSS files. In this
+code, it is importing functionality from six different SCSS files: `elements.form`, `elements.html`,
+`elements.images`, `elements.links`, `elements.page`, and `elements.typography`. */
+@use './elements.form' as form;
+@use './elements.html' as html;
+@use './elements.images' as images;
+@use './elements.links' as links;
+@use './elements.page' as page;
+@use './elements.typography' as typography;

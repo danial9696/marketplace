@@ -1,0 +1,91 @@
+@use '@styles/02-tools/tools.flex' as *;
+
+.c-dialog__content {
+  width: fit-content;
+  min-width: 314px;
+  min-height: 143px;
+  background: var(--white);
+  border: 1px solid var(--dialog-border-color);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px 12px 24px 12px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-dialog__header {
+  @include flex-center-vertical;
+  justify-content: flex-end;
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--dialog-header-color);
+  }
+
+  i {
+    color: var(--dialog-header-color);
+    font-size: 24px;
+  }
+
+  &--has-border {
+    border-bottom: 1px solid var(--detail-st-color);
+    justify-content: space-between;
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+  }
+}
+
+.c-dialog__overlay {
+  background-color: var(--primary-layer-color);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-dialog__footer {
+  @include flex-center-vertical;
+  width: 100%;
+  flex-direction: row-reverse;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.c-dialog__loading {
+  @include flex-center;
+  flex-direction: column;
+  height: 100%;
+  margin: 44px 0 32px 0;
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--dialog-loading-titke-color);
+    margin-bottom: 12px;
+  }
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

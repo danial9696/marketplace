@@ -1,0 +1,52 @@
+/* ==========================================================================
+   * Breakpoints & Variables
+   ========================================================================== 
+*/
+
+// ! Marketplace sizing & grid system => 24 col / 12 col
+// * Name	Size	Container	#-of-Cols	Gutter-Width	Margin
+// * xxs	320	  320	      12	      16	          8
+// * xs	  420	  420	      12	      16	          8
+// * sm	  576	  540	      12	      16	          8
+// * md	  768	  720	      24	      16	          8
+// * lg	  992	  960	      24	      16	          8
+// * xl	  1200	1140	    24	      16	          8
+// * xxl	1400	1320	    24	      16	          8
+// * 3xl	1600	1320	    24	      16	          8
+
+/* It is defining a Sass map variable named representing the different screen sizes at which the website's layout will change. */
+// * Start - Grid Breakpoints
+$grid-breakpoints: (
+  xxxs: 0,
+  xxs: 320px,
+  xs: 420px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1600px,
+) !default;
+// * End - Grid Breakpoints
+
+$rfs-mode: min-media-query !default;
+
+// Breakpoint at where values start decreasing if screen width is smaller
+$rfs-breakpoint: map-get($grid-breakpoints, xxl) !default;
+
+$rfs-breakpoint-unit: px !default;
+
+@if $rfs-breakpoint-unit != px and $rfs-breakpoint-unit != em and $rfs-breakpoint-unit != rem {
+  @error "`#{$rfs-breakpoint-unit}` is not a valid unit for $rfs-breakpoint-unit. Use `px`, `em` or `rem`.";
+}
+
+// Calculate the media query value
+$rfs-mq-value: if(
+  $rfs-breakpoint-unit == px,
+  #{$rfs-breakpoint}px,
+  #{divide($rfs-breakpoint, $rfs-rem-value)}#{$rfs-breakpoint-unit}
+);
+
+$rfs-mq-property-width: if($rfs-mode == max-media-query, max-width, min-width);
+
+$rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height);

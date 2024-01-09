@@ -1,0 +1,13 @@
+// ========================================================================
+// *  Clearfix
+//   ======================================================================== */
+
+// * Mixin to drop micro clearfix into a selector.
+
+@mixin clearfix() {
+  &::after {
+    content: '' !important;
+    display: block !important;
+    clear: both !important;
+  }
+}

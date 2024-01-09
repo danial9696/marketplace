@@ -1,0 +1,148 @@
+/* ==========================================================================
+   * Grid System
+   * Generate semantic grid columns with these mixins.
+   ========================================================================== 
+*/
+
+@use '@styles/01-settings/settings.spacing' as *;
+@use '@styles/01-settings/setting.grid' as *;
+@use '@styles/01-settings/settings.breakpoints' as *;
+@use '@styles/01-settings/settings.global' as *;
+
+@use '@styles/02-tools/tools.breakpoint' as *;
+@use '@styles/02-tools/tools.functions' as *;
+@use '@styles/02-tools/tools.grid' as gridFn;
+
+@include gridFn.assert-ascending($grid-breakpoints, '$grid-breakpoints');
+@include gridFn.assert-starts-at-zero($grid-breakpoints, '$grid-breakpoints');
+
+// * Framework grid generation
+// * Inspired by Bootstrap to generate the correct number of grid classes base on our grid system responsive sizes "$grid-columns-xxs-up" and "$grid-columns-sm-up"
+
+/* The `@mixin make-grid-columns` is a mixin that generates grid column classes for a given number of
+columns and breakpoints. It loops through each breakpoint defined in `` and generates
+classes for that breakpoint. */
+@mixin make-grid-columns($columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @include media-up($breakpoint, $breakpoints) {
+      // * Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .o-col#{$infix} {
+        // ! Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+        // ! Don't change 0% to 0
+        flex: 1 0 0%;
+      }
+
+      .o-row-cols#{$infix}-auto > * {
+        @include gridFn.make-col-auto();
+      }
+
+      @if $grid-row-columns > 0 {
+        @for $i from 1 through $grid-row-columns {
+          .o-row-cols#{$infix}-#{$i} {
+            @include gridFn.row-cols($i);
+          }
+        }
+      }
+
+      .o-col#{$infix}-auto {
+        @include gridFn.make-col-auto();
+      }
+
+      @if $columns > 0 {
+        @for $i from 1 through $columns {
+          .o-col#{$infix}-#{$i} {
+            @include gridFn.make-col($i, $columns);
+          }
+        }
+
+        // `$columns - 1` because offsetting by the width of an entire row isn't possible
+        @for $i from 0 through ($columns - 1) {
+          @if not($infix == '' and $i == 0) {
+            // Avoid emitting useless .offset-0
+            .o-offset#{$infix}-#{$i} {
+              @include gridFn.make-col-offset($i, $columns);
+            }
+          }
+        }
+      }
+
+      // * Gutters
+      // Make use of `.g-*`, `.gx-*` or `.gy-*` utilities to change spacing between the columns.
+      @each $key, $value in $gutters {
+        .o-g#{$infix}-#{$key},
+        .o-gx#{$infix}-#{$key} {
+          --#{$prefix}gutter-x: #{$value};
+        }
+
+        .o-g#{$infix}-#{$key},
+        .o-gy#{$infix}-#{$key} {
+          --#{$prefix}gutter-y: #{$value};
+        }
+      }
+    }
+  }
+}
+
+/* The `@mixin make-cssgrid` is a mixin that generates CSS Grid classes for a given number of columns
+and breakpoints. It loops through each breakpoint defined in `` and generates classes
+for that breakpoint. */
+@mixin make-cssgrid($columns, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @include media-up($breakpoint, $breakpoints) {
+      @if $columns > 0 {
+        @for $i from 1 through $columns {
+          .o-g-col#{$infix}-#{$i} {
+            grid-column: auto / span $i;
+          }
+        }
+
+        // Start with `1` because `0` is and invalid value.
+        // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+        @for $i from 1 through ($columns - 1) {
+          .o-g-start#{$infix}-#{$i} {
+            grid-column-start: $i;
+          }
+        }
+      }
+    }
+  }
+}
+
+.o-row {
+  @include gridFn.make-row();
+
+  > * {
+    @include gridFn.make-col-ready();
+  }
+}
+
+.o-grid {
+  display: grid;
+  grid-template-rows: repeat(var(--#{$prefix}rows, 1), 1fr);
+  gap: var(--#{$prefix}gap, #{$grid-gutter-width});
+
+  @include media-up(xxs) {
+    @include make-cssgrid($grid-columns-xxs-up);
+    grid-template-columns: repeat(var(--#{$prefix}columns, #{$grid-columns-xxs-up}), 1fr);
+  }
+
+  @include media-up(sm) {
+    @include make-cssgrid($grid-columns-sm-up);
+    grid-template-columns: repeat(var(--#{$prefix}columns, #{$grid-columns-sm-up}), 1fr);
+  }
+}
+
+// * Columns
+/* This will generate CSS classes for
+grid columns that can be used in the HTML markup to create a responsive grid system. */
+@include media-up(xxs) {
+  @include make-grid-columns($grid-columns-xxs-up);
+}
+
+@include media-up(sm) {
+  @include make-grid-columns($grid-columns-sm-up);
+}

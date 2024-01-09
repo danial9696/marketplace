@@ -1,0 +1,6 @@
+/* The `@use` directive is used in SCSS to import and use functions, mixins, and variables from other
+SCSS files. */
+@use './utilities.generator' as container;
+@use './utilities.headings' as headings;
+@use './utilities.texts' as texts;
+@use './utilities.print' as print;

@@ -1,0 +1,75 @@
+@use '@styles/02-tools/tools.placeholder' as fn;
+@use '@styles/02-tools/tools.pseudo' as pseudoFn;
+@use 'sass:color';
+
+.c-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  i {
+    position: absolute;
+    top: 55%;
+    left: 8px;
+    display: block;
+    font-size: 16px;
+    z-index: 100;
+    color: var(--primary-input-label-color);
+  }
+}
+
+.c-input__label {
+  color: var(--primary-input-label-color);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  margin-bottom: 4px;
+  width: fit-content;
+
+  &--req {
+    @include pseudoFn.pseudo(after, 8px, 8px, 0, -16px, null, null, true, '*') {
+      color: var(--danger-st-color);
+    }
+  }
+}
+
+.c-input__field {
+  background-color: var(--primary-input-bg-color);
+  border: 1px solid var(--primary-input-border-color);
+  color: var(--primary-input-label-color);
+  border-radius: 2px;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 4px;
+
+  &--sm {
+    height: 24px;
+  }
+
+  &--md {
+    height: 32px;
+  }
+
+  &--err {
+    background-color: var(--primary-input-error-bg-color);
+    border: 1px solid var(--danger-st-color);
+    border-radius: 2px;
+
+    & + p {
+      font-weight: 400;
+      font-size: 10px;
+      color: var(--danger-st-color);
+      margin-top: 8px;
+      position: absolute;
+      bottom: -12px;
+    }
+  }
+
+  @include fn.placeholder {
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--primary-input-placeholder-color);
+  }
+}

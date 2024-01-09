@@ -1,0 +1,54 @@
+@use '../02-tools/tools.fonts' as fn;
+
+// IRANSansXDemiBold font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansX,
+  '../../../../public/fonts/iranSans/IRANSansX-DemiBold',
+  600
+);
+
+// IRANSansXDemiMedium font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansX,
+  '../../../../public/fonts/iranSans/IRANSansX-Medium',
+  500
+);
+
+// IRANSansXRegular font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansX,
+  '../../../../public/fonts/iranSans/IRANSansX-Regular',
+  400
+);
+
+// IRANSansXLight font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansX,
+  '../../../../public/fonts/iranSans/IRANSansX-Light',
+  300
+);
+
+//
+// ** Fa Numerials
+//
+
+// IRANSansXNumMeduim font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansXNum,
+  '../../../../public/fonts/iranSans/num/IRANSansXFaNum-Medium',
+  500
+);
+
+// IRANSansXNumRegular font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansXNum,
+  '../../../../public/fonts/iranSans/num/IRANSansXFaNum-Regular',
+  400
+);
+
+// IRANSansXNumLight font-family generated from font-face-generator @mixin
+@include fn.font-face-generator(
+  iranSansXNum,
+  '../../../../public/fonts/iranSans/num/IRANSansXFaNum-Light',
+  300
+);

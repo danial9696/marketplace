@@ -1,0 +1,330 @@
+@use '@styles/01-settings/settings.colors' as *;
+@use 'sass:color';
+
+:root {
+  --white: #{$white};
+  --black: #{$black};
+
+  // * Start - Status colors
+  --primary-st-color: #{map-get($status-colors, primary)};
+  --dark-st-color: #{map-get($status-colors, dark)};
+  --light-st-color: #{map-get($status-colors, light)};
+  --success-st-color: #{map-get($status-colors, success)};
+  --danger-st-color: #{map-get($status-colors, danger)};
+  --info-st-color: #{map-get($status-colors, info)};
+  --warning-st-color: #{map-get($status-colors, warning)};
+  --detail-st-color: #{map-get($status-colors, detail)};
+  --neutral-st-color: #{map-get($status-colors, neutral)};
+  // * End - Status colors
+
+  // * Start - Titles
+  --primary-title-color: #{map-get($blacks, black-base)};
+  --secondary-title-color: #{map-get($blacks, black-lighter-300)};
+  --division-title-color: #{map-get($blacks, black-lighter-100)};
+  // * End - Titles
+
+  // * Start - Titles on images
+  --dark-title-color: #{map-get($blacks, black-base)};
+  --light-title-color: #{$white};
+  // * End - Titles on images
+
+  // * Start - Titles on layers
+  --light-layer-title-color: #{$white};
+  // * End - Titles on layers
+
+  // * Start - Borders
+  --primary-section-border-color: #{map-get($grays, gray-darker-200)};
+  // * End - Borders
+
+  // * Start - Dividers
+  --primary-divider-color: #{map-get($blacks, gray-darker-600)};
+  --secondary-divider-color: #{map-get($grays, gray-lighter-900)};
+  // * End - Dividers
+
+  // ! Start - Buttons
+
+  // * Primary Action button
+  --primary-action-btn-bg-color: #{map-get($yellows, yellow-base)};
+  --primary-action-text-color: #{map-get($blacks, black-base)};
+  --primary-action-hover-color: #{map-get($yellows, yellow-darker-100)};
+
+  // * Secondary Action button
+  --secondary-action-btn-bg-color: #{map-get($yellows, yellow-lighter-600)};
+  --secondary-action-text-color: #{map-get($blacks, black-lighter-100)};
+  --secondary-action-hover-color: #{map-get($yellows, yellow-lighter-400)};
+
+  // * Action buttons: disabled
+  --action-btn-disabled-color: #{map-get($grays, gray-darker-100)};
+
+  // * Outline Action button
+  --outline-action-text-color: #{map-get($blacks, black-base)};
+  --outline-action-border-color: #{map-get($yellows, yellow-lighter-600)};
+
+  // * Secondary button
+  --secondary-btn-color: #{map-get($blacks, black-base)};
+  --secondary-btn-border-color: #{map-get($blacks, black-base)};
+  --secondary-btn-hover-color: #{map-get($blues, blue-base)};
+
+  // ! End - Buttons
+
+  // ! Start - Links
+
+  // * Primary links
+  --primary-link-color: #{map-get($blacks, black-lighter-100)};
+  --primary-link-hover-color: #{map-get($blues, blue-lighter-100)};
+
+  // * Secondary links
+  --secondary-link-color: #{map-get($yellows, yellow-darker-300)};
+  --secondary-link-hover-color: #{map-get($blues, blue-base)};
+
+  // ! End - Links
+
+  // * Start - Input radio
+  --radio-text-color: #{map-get($blacks, black-lighter-500)};
+  --radio-border-color: #{map-get($blacks, black-lighter-500)};
+  --radio-hover-color: #{map-get($blues, blue-base)};
+  --radio-selected-indicator-color: #{map-get($blues, blue-base)};
+  --radio-selected-text-color: #{map-get($blacks, black-lighter-100)};
+  --radio-disabled-color: #{map-get($grays, gray-darker-200)};
+  // * End - Input radio
+
+  // * Start - Switch
+  --switch-text-color: #{map-get($blacks, black-lighter-300)};
+  --switch-border-color: #{map-get($blacks, black-lighter-600)};
+  --switch-bg-color: #{map-get($blacks, black-lighter-600)};
+  --switch-selected-color: #{map-get($greens, green-base)};
+  --switch-disabled-color: #{map-get($grays, gray-darker-200)};
+  // * End - Switch
+
+  // ! Start - toggle groups
+
+  // * Start - Primary toggle group buttons
+  --toggle-group-border-color: #{map-get($grays, gray-darker-200)};
+  --toggle-group-text-color: #{map-get($blacks, black-lighter-100)};
+  --toggle-group-hover-border-color: #{map-get($grays, gray-darker-100)};
+  --toggle-group-disabled-color: #{map-get($blacks, black-lighter-500)};
+  --toggle-group-disabled-border-color: #{map-get($grays, gray-darker-100)};
+  --toggle-group-hover-bg-color: #{map-get($grays, gray-base)};
+  --toggle-group-selected-color: #{map-get($yellows, yellow-base)};
+  // * End - Primary toggle group buttons
+
+  // * Start - Secondary toggle group buttons
+  --sec-toggle-group-text-color: #{map-get($blacks, black-lighter-500)};
+  --sec-toggle-group-border-color: #{map-get($grays, gray-darker-200)};
+  --sec-toggle-group-disabled-color: #{map-get($grays, gray-darker-300)};
+  --sec-toggle-group-disabled-bg-color: #{map-get($grays, gray-darker-100)};
+  --sec-toggle-group-selected-color: #{map-get($blacks, black-lighter-300)};
+  --sec-toggle-group-selected-border-color: #{map-get($greens, green-base)};
+  // * End - Secondary toggle group buttons
+
+  // ! End - toggle groups
+
+  // ! Start - Input texts
+
+  // * Start - Primary Input text
+  --primary-input-label-color: #{map-get($blacks, black-lighter-300)};
+  --primary-input-placeholder-color: #{map-get($blacks, black-lighter-300)};
+  --primary-input-border-color: #{map-get($blacks, black-lighter-500)};
+  --primary-input-bg-color: #{map-get($grays, gray-base)};
+  --primary-input-error-bg-color: rgb(242 124 148 / 20%);
+  // * End - Primary Input text
+
+  // ! End - Input texts
+
+  // ! Start - Labels
+
+  // * Start - Link label
+  --link-label-text-color: #{map-get($blacks, black-lighter-100)};
+  --link-label-border-color: #{map-get($grays, gray-darker-100)};
+  --link-label-bg-color: #{map-get($grays, gray-base)};
+  --link-label-hover-color: #{map-get($yellows, yellow-lighter-700)};
+  // * End - Link label
+
+  // * Start - Secondary label
+  --secondary-label-text-color: #{map-get($blacks, black-lighter-100)};
+  --secondary-label-border-color: #{map-get($blacks, black-lighter-500)};
+  --secondary-label-text-hover-color: #{map-get($greens, green-base)};
+  --secondary-label-border-hover-color: #{map-get($greens, green-darker-100)};
+  // * End - Secondary label
+
+  // * Start - Status label
+  --status-label-text-color: #{map-get($blacks, black-base)};
+  --status-label-border-color: #{map-get($blacks, black-lighter-500)};
+  // * End - Status label
+
+  // ! End - Labels
+
+  // ! Start - Contact input
+
+  // * Start - Primary contact input
+  --primary-contact-input-text-color: #{map-get($blacks, black-lighter-300)};
+  --primary-contact-input-placeholder-text-color: #{map-get($blacks, black-lighter-500)};
+  --primary-contact-input-bg-color: #{map-get($grays, gray-darker-100)};
+  --primary-contact-input-error-bg-color: #{map-get($reds, red-lighter-600)};
+  --primary-contact-input-border-color: #{map-get($blacks, black-lighter-500)};
+  --primary-contact-input-hover-bg-color: #{map-get($yellows, yellow-lighter-700)};
+  // * End - Primary contact input
+
+  // * Start - Secondary contact input
+  --secondary-contact-input-border-color: #{map-get($blacks, black-lighter-100)};
+  // * End - Secondary contact input
+
+  // ! End - Contact input
+
+  // ! Start - Slider
+
+  --slider-bg: #{map-get($grays, gray-darker-200)};
+  --slider-thumb: #{map-get($blacks, black-lighter-300)};
+  --slider-track: #{map-get($blacks, black-lighter-300)};
+  --slider-thumb-select: #{map-get($blacks, black-base)};
+  --slider-thumb-tooltip-bg: #{map-get($grays, gray-base)};
+  --slider-thumb-tooltip-border: #{map-get($grays, gray-darker-100)};
+  --slider-thumb-tooltip-text: #{map-get($blacks, black-lighter-300)};
+
+  // ! End - Slider
+
+  // * Start - Accordion
+  --acc-border-color: #{map-get($grays, gray-darker-200)};
+  --acc-title-color: #{map-get($blacks, black-base)};
+  --acc-sub-title-color: #{map-get($blacks, black-lighter-300)};
+  --acc-text-color: #{map-get($blacks, black-lighter-500)};
+  --acc-indicator-color: #{map-get($blacks, black-base)};
+  --acc-focus-bg-color: #{map-get($grays, gray-base)};
+  // * End - Accordion
+
+  // * Start - Check Box
+  --checkbox-text-color: #{map-get($blacks, black-lighter-300)};
+  --checkbox-border-color: #{map-get($blacks, black-lighter-600)};
+  --checkbox-bg-color: #{map-get($blacks, black-lighter-600)};
+  --checkbox-disabled-color: #{map-get($grays, gray-darker-200)};
+  --checkbox-hover-color: #{map-get($grays, green-lighter-400)};
+  // * End - Check Box
+
+  // * Start - Range
+  --range-text-color: #{map-get($blacks, black-lighter-600)};
+  --range-border-color: #{map-get($blacks, black-lighter-500)};
+  --range-border-focus-color: #{map-get($purples, purple-base)};
+  // * End - Range
+
+  // * Start - Dropdown
+  --dropdown-title-color: #{map-get($blacks, black-lighter-100)};
+  --dropdown-title-disabled-color: #{map-get($blacks, black-lighter-500)};
+  --dropdown-icon-color: #{map-get($blacks, black-lighter-300)};
+  --dropdown-icon-disabled-color: #{map-get($blacks, black-lighter-600)};
+  --dropdown-detail-color: #{map-get($blacks, black-lighter-500)};
+  --dropdown-border-color: #{map-get($blacks, black-lighter-500)};
+  --dropdown-hover-color: #{map-get($yellows, yellow-lighter-700)};
+  --dropdown-shadow: 0px 0px 6px rgba(83, 83, 83, 0.25);
+  // * End - Dropdown
+
+  // * Start -  Popover
+  --content-bg-color: #{map-get($grays, gray-base)};
+  --content-text-color: #{map-get($blacks, black-lighter-300)};
+  --content-shadow-color: 0px 0px 3px rgba(100, 98, 98, 0.38);
+  // * End -  Popover
+
+  // * Start - Paginations
+  --pagination-indicator-bg-color: #{map-get($yellows, yellow-base)};
+  --pagination-indicator-hover-color: #{map-get($yellows, yellow-base)};
+  --pagination-arrow-color: #{map-get($blacks, black-lighter-100)};
+  --pagination-text-color: #{map-get($blacks, black-lighter-100)};
+  // * End - Paginations
+
+  // * Start - Navigations
+  --nav-menu-color-text: #{$white};
+  --nav-menu-color-icon: #{$white};
+  // * End - Navigations
+
+  // * Start - Header
+  --header-icon-color: #{$white};
+  // * End - Header
+
+  // * Start - Alert Dialog
+  --dialog-border-color: #{map-get($blacks, black-lighter-300)};
+  --dialog-header-color: #{map-get($blacks, black-base)};
+  --dialog-loading-titke-color: #{map-get($blacks, black-lighter-300)};
+  // * End - Alert Dialog
+
+  // * Start - Sticky List
+  --st-list-header-border: #{map-get($grays, gray-darker-200)};
+  --st-list-header-shadow: 0px 1px 5px -5px rgba(119, 119, 119, 0.25);
+  --st-list-header-text-color: #{map-get($blacks, black-lighter-100)};
+  --st-list-header-content-title-color: #{map-get($blacks, black-lighter-100)};
+  --st-list-header-icon-color: #{map-get($blacks, black-lighter-500)};
+  // * End - Sticky List
+
+  // * Start - Check List
+  --check-list-border: #{map-get($grays, gray-darker-200)};
+  --check-list-text-muted: #{map-get($grays, gray-darker-200)};
+  --check-list-item-disabled-tick-border: #{map-get($grays, gray-darker-100)};
+  --check-list-item-tick-border: #{map-get($blacks, black-lighter-500)};
+  --check-list-item-primary-icon: #{map-get($blacks, black-lighter-500)};
+  --check-list-item-primary-text: #{map-get($blacks, black-lighter-500)};
+  --check-list-item-secondary-title: #{map-get($blacks, black-lighter-100)};
+  --check-list-item-secondary-text: #{map-get($blacks, black-lighter-300)};
+  --check-list-shadow-error: 0px 0px 5px rgba(234, 36, 76, 0.47);
+  --check-list-item-shadow: 0px 0px 5px rgba(200, 200, 200, 0.47);
+  --check-list-item-selected-shadow: 0px 0px 5px rgba(20, 174, 92, 0.15);
+  // * End - Check List
+
+  // ! Start - Carousels
+
+  // * Start - Single Carousel List
+  --carousel-dot-bg-color: #{map-get($blacks, black-lighter-500)};
+  --carousel-arrow-icon-color: #{map-get($blacks, black-lighter-100)};
+  --carousel-arrow-shadow: rgba(0, 0, 0, 0.1);
+  --carousel-arrow-bg-color: rgba(255, 255, 255, 0.5);
+  --carousel-arrow-border: linear-gradient(
+    161.18deg,
+    rgba(167, 167, 167, 0.4) 7.51%,
+    rgba(192, 192, 192, 0.2) 90.76%
+  );
+  --carousel-arrow-outline-bg-color: rgba(255, 255, 255, 0.35);
+  // * Start - Multi Carousel List
+
+  // * Start - Scrollbar
+  --scrollbar-bg-color: #{map-get($grays, gray-darker-100)};
+  --scrollbar-bg-hover-color: #{map-get($grays, gray-darker-100)};
+  --scrollbar-thumb-bg-color: #{map-get($grays, gray-darker-300)};
+  --scrollbar-bg-corner: #{map-get($grays, gray-darker-100)};
+  // * End - Scrollbar
+
+  // * Start - Multi Carousel List
+  // * End - Multi Carousel List
+
+  // ! End - Carousels
+
+  // * Start - Tooltip
+  --tooltip-bg-color: #{map-get($blacks, black-lighter-100)};
+  --tooltip-arrow-color: #{map-get($blacks, black-lighter-100)};
+  // * End - Tooltip
+
+  // ! Start - Tables
+
+  // * Start - Custom Table
+  --custom-table-border: #{map-get($grays, gray-darker-200)};
+  --custom-table-header-cell: #{map-get($blacks, black-lighter-100)};
+  --custom-table-header-bg-cell: #{map-get($yellows, yellow-lighter-700)};
+  --custom-table-body-cell: #{map-get($blacks, black-lighter-500)};
+  --custom-table-body-disabled-cell: #{map-get($grays, gray-darker-200)};
+  --custom-table-btn-border: #{map-get($grays, gray-darker-100)};
+  // * End - Custom Table
+
+  // ! End - Tables
+
+  // * Start - Shadows
+  --primary-shadow: 0px 0px 10px 0px rgba(100, 98, 98, 0.15);
+  // * End - Shadows
+
+  // * Start - Layers
+  --primary-layer-color: rgba(56, 53, 53, 0.8);
+  --secondary-layer-color: rgba($black, 0.8);
+  // * End - Layers
+
+  // * Start - Linear-gradient
+  --yellow-layer-color: 266.6deg, rgba(255, 199, 0, 0.9) 0%, rgba(255, 215, 37, 0.9) 100%;
+  --blue-layer-color: 180deg, #000428 0%, #004e92 100%;
+  --green-layer-color: 89.51deg, #00aa7f 0%, #135058 100%;
+  --mag-layer-color: 180deg, rgba(33, 33, 33, 0) 0%, rgba(33, 33, 33, 0.57) 50%, #000000 100%;
+  // * End - Linear-gradient
+}

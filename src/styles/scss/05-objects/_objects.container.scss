@@ -1,0 +1,57 @@
+@use '../01-settings/settings.breakpoints' as *;
+@use '../01-settings/setting.container' as *;
+@use '../02-tools/tools.breakpoint' as *;
+@use '../02-tools/tools.container' as *;
+
+/* ==========================================================================
+   #CONTAINER-OBJECT
+   ========================================================================== */
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+// Single container class with breakpoint max-widths
+/* This code is defining two container classes: `.o-container` and `.o-container-fluid`. Both classes
+are using the `make-container()` mixin to set their width to 100% at all breakpoints. The
+`.o-container` class is intended for containers with a fixed maximum width, while the
+`.o-container-fluid` class is intended for containers that should always be full width. */
+.o-container,
+  // 100% wide container at all breakpoints
+  .o-container-fluid {
+  @include make-container();
+}
+
+// Responsive containers that are 100% wide until a breakpoint
+/* This code is creating responsive container classes with different maximum widths for different
+breakpoints. It uses the `@each` directive to loop through the `-max-widths` map, which
+contains the maximum widths for each breakpoint. For each breakpoint, it creates a new container
+class with the format `.o-container-{breakpoint}` and extends the `.o-container-fluid` class to make
+it 100% wide. */
+@each $breakpoint, $container-max-width in $container-max-widths {
+  .o-container-#{$breakpoint} {
+    @extend .o-container-fluid;
+  }
+
+  @include media-up($breakpoint, $grid-breakpoints) {
+    %responsive-container-#{$breakpoint} {
+      max-width: $container-max-width;
+    }
+
+    // Extend each breakpoint which is smaller or equal to the current breakpoint
+    $extend-breakpoint: true;
+
+    @each $name, $width in $grid-breakpoints {
+      @if ($extend-breakpoint) {
+        .o-container#{breakpoint-infix($name, $grid-breakpoints)} {
+          @extend %responsive-container-#{$breakpoint};
+        }
+
+        // Once the current breakpoint is reached, stop extending
+        @if ($breakpoint == $name) {
+          $extend-breakpoint: false;
+        }
+      }
+    }
+  }
+}

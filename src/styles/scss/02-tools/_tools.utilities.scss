@@ -1,0 +1,95 @@
+// ==========================================================================
+// * Utilities generator
+// ==========================================================================
+
+@use '../01-settings/settings.spacing' as *;
+@use '../01-settings/setting.display' as *;
+@use '../01-settings/setting.sizing' as *;
+@use '../01-settings/settings.spacing' as *;
+@use '../01-settings/settings.fonts' as *;
+@use '../01-settings/settings.overflow' as *;
+@use '../01-settings/settings.opacity' as *;
+@use '../01-settings/settings.text' as *;
+@use '../01-settings/settings.colors' as *;
+@use '../01-settings/settings.fonts' as *;
+@use '../01-settings/setting.container' as *;
+@use '../02-tools/tools.functions' as fn;
+
+// Here we merge all utility maps from settings
+// To add new utility classes:
+// 1- Add utility variables
+
+// e.g. $u-new-utility: (scss map similar to other utilis )
+// $u-new-utility: ('some-css-property': (
+//    responsive: true,
+//    property: some-css-property,
+//    class: mb,
+//    values:
+//      map-merge(
+//        $spacers,
+//        (
+//          auto: auto
+//        )
+//      ))
+// )
+
+// 2- Merge new utility variable to $merged-all-utilities
+
+$merged-all-utilities: fn.map-collect(
+  $u-opacity,
+  $u-align,
+  $u-overflow,
+  $u-display,
+  $u-width,
+  $u-max-width,
+  $u-vw-width,
+  $u-height,
+  $u-max-height,
+  $u-vw-height,
+  $u-flex-direction,
+  $u-flex-grow,
+  $u-flex-shrink,
+  $u-flex-wrap,
+  $u-justify-content,
+  $u-align-items,
+  $u-align-content,
+  $u-align-self,
+  $u-order,
+  $u-margin,
+  $u-margin-x,
+  $u-margin-y,
+  $u-margin-top,
+  $u-margin-end,
+  $u-margin-bottom,
+  $u-margin-start,
+  $u-margin-bottom,
+  $u-negative-margin,
+  $u-negative-margin-x,
+  $u-negative-margin-y,
+  $u-negative-margin-top,
+  $u-negative-margin-end,
+  $u-negative-margin-bottom,
+  $u-negative-margin-start,
+  $u-padding,
+  $u-padding-x,
+  $u-padding-y,
+  $u-padding-top,
+  $u-padding-end,
+  $u-padding-bottom,
+  $u-padding-start,
+  $u-gap,
+  $u-font-size,
+  $u-font-weight,
+  $u-text-align,
+  $u-bg-color,
+  $u-bg-opacity
+);
+
+/* This code is creating a map of utility classes by merging all the utility maps from different
+settings files. The `` variable is initially set to an empty map using the `!default`
+flag. Then, the `map-merge` function is used to merge the `-all-utilities` map (which
+contains all the utility maps from different settings files) with the `` map. This allows
+for the addition of new utility classes to the `` map in the future. */
+$utilities: () !default;
+
+$utilities: map-merge($merged-all-utilities, $utilities);

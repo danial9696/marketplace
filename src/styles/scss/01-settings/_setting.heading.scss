@@ -1,0 +1,28 @@
+/* ==========================================================================
+   * Heading font-sizes based on responsive sizes
+   ========================================================================== 
+*/
+
+// * H1 font-sizes
+$h1-font-size: (
+  null: 1.5rem,
+  576px: 2rem,
+) !default;
+
+// * H2 font-sizes
+$h2-font-size: (
+  null: 1rem,
+  320px: 1.25rem,
+  420px: 1.5rem,
+) !default;
+
+// * H3 font-sizes
+$h3-font-size: (
+  null: 1rem,
+  420px: 1.25rem,
+) !default;
+
+// * H4 font-sizes
+$h4-font-size: (
+  null: 1rem,
+) !default;

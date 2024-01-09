@@ -1,0 +1,25 @@
+/* ==========================================================================
+   * Text Variables
+   ========================================================================== */
+
+$u-text-align: (
+  'text-align': (
+    responsive: true,
+    property: text-align,
+    class: 'u-text',
+    values: (
+      start: left,
+      end: right,
+      center: center,
+    ),
+  ),
+);
+
+$u-align: (
+  'align': (
+    property: vertical-align,
+    class: 'u-align',
+    responsive: true,
+    values: baseline top middle bottom text-bottom text-top,
+  ),
+);

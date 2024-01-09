@@ -1,0 +1,36 @@
+// ========================================================================
+// * On Event
+//   ======================================================================== */
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+// .usage {
+//   @include on-event {
+//     color: rebeccapurple;
+//   }
+// }
+// }
+/* This is a SCSS mixin called `on-event` that creates a wrapper for styling elements based on
+different events such as hover, active, and focus. It takes an optional boolean parameter ``
+which defaults to `false`. If `` is `true`, the mixin applies the styles to the current
+selector as well as the hover, active, and focus states. If `` is `false`, the mixin only
+applies the styles to the hover, active, and focus states. The `@content` directive is used to
+insert the styles passed to the mixin. */
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}

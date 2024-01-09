@@ -1,0 +1,78 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/01-settings/settings.animations' as *;
+
+.c-access {
+  width: 36px;
+}
+
+.c-access__items {
+  background-color: #383535;
+
+  &--top {
+    border-radius: 2px 2px 0px 0px;
+  }
+
+  &--right {
+    border-radius: 0px 2px 2px 0px;
+  }
+
+  &--bottom {
+    border-radius: 0px 0px 2px 2px;
+  }
+
+  &--left {
+    border-radius: 2px 0px 0px 2px;
+  }
+}
+
+.c-access__item {
+  @include flex-center;
+  width: 36px;
+  height: 36px;
+  transition: background-color $button-hover-time ease-out;
+
+  button {
+    width: 100%;
+    height: 100%;
+  }
+
+  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
+  border-top: 1px solid transparent;
+
+  &:last-child {
+    border-bottom: 1px solid transparent;
+  }
+
+  &:hover {
+    background-color: #fdd008;
+    border-bottom: 1px solid #fdd008;
+    border-top: 1px solid #fdd008;
+
+    .c-access__trigger {
+      i {
+        color: #383535;
+      }
+    }
+  }
+}
+
+.c-access__content-title {
+  background-color: #383535;
+  padding: 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.c-access__content-arrow {
+  color: #383535;
+}
+
+.c-access__trigger {
+  i {
+    font-size: 28px;
+    color: #fdd008;
+  }
+}

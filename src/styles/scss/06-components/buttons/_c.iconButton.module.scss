@@ -1,0 +1,76 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/01-settings/setting.sizing' as *;
+
+.c-icon-button {
+  @include flex-center;
+  padding: 8px;
+  width: auto;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 13px;
+  background-color: transparent;
+  border: 1px dashed var(--primary-icon-border-color);
+  color: var(--primary-icon-text-color);
+
+  i {
+    font-size: 16px;
+    margin-left: 8px;
+  }
+
+  &--xs {
+    height: map-get($btn-height, xs);
+  }
+
+  &--md {
+    height: map-get($btn-height, md);
+  }
+
+  &--sm {
+    height: map-get($btn-height, sm);
+  }
+
+  &--lg {
+    height: map-get($btn-height, lg);
+  }
+
+  &--primary {
+    border: 1px dashed var(--primary-st-color);
+    color: var(--primary-st-color);
+  }
+
+  &--success {
+    border: 1px dashed var(--success-st-color);
+    color: var(--success-st-color);
+  }
+
+  &--danger {
+    border: 1px dashed var(--danger-st-color);
+    color: var(--danger-st-color);
+  }
+
+  &--warning {
+    border: 1px dashed var(--warning-st-color);
+    color: var(--warning-st-color);
+  }
+
+  // * Default: Info
+  &--info {
+    border: 1px dashed var(--info-st-color);
+    color: var(--info-st-color);
+  }
+
+  &--detail {
+    border: 1px dashed var(--detail-st-color);
+    color: var(--detail-st-color);
+  }
+
+  &--neutral {
+    border: 1px dashed var(--neutral-st-color);
+    color: var(--neutral-st-color);
+  }
+
+  &--secondary {
+    border: none;
+  }
+}

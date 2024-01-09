@@ -1,0 +1,70 @@
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.breakpoint' as *;
+@use '@styles/02-tools/tools.pseudo' as fn;
+
+.c-carousel {
+  @include media-up(xxs) {
+    height: 163px;
+    max-width: 304px;
+  }
+
+  @include media-up(xs) {
+    height: 219px;
+    max-width: 404px;
+  }
+
+  @include media-up(sm) {
+    height: 268px;
+    max-width: 524px;
+  }
+
+  @include media-up(md) {
+    height: 428px;
+    max-width: 494px;
+  }
+
+  @include media-up(lg) {
+    height: 428px;
+    max-width: 744px;
+  }
+
+  @include media-up(xl) {
+    height: 428px;
+    max-width: 459px;
+  }
+
+  @include media-up(xxl) {
+    max-width: 550px;
+    height: 428px;
+  }
+}
+
+.c-carousel__wrapper {
+  &--is-moving {
+    .c-carousel__item {
+      cursor: grab;
+    }
+  }
+}
+
+.c-carousel__container {
+  height: 100%;
+}
+
+.c-carousel__item {
+  height: 100%;
+}
+
+.c-carousel__dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 24px;
+
+  button {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--carousel-dot-bg-color);
+  }
+}

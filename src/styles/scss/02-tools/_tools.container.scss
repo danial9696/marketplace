@@ -1,0 +1,20 @@
+/* ==========================================================================
+   * Containers Tools
+   ========================================================================== 
+*/
+
+@use '@styles/01-settings/setting.container' as *;
+@use '@styles/01-settings/setting.grid' as *;
+@use '@styles/01-settings/settings.global' as *;
+
+/* This is a SCSS mixin called `make-container` that takes an optional argument `` with a
+default value of `-padding-x` (which is imported from a settings file). */
+@mixin make-container($gutter: $container-padding-x) {
+  --#{$prefix}gutter-x: #{$gutter};
+  --#{$prefix}gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5);
+  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}

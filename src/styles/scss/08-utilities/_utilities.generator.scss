@@ -1,0 +1,104 @@
+// Utilities
+
+@use '../01-settings/settings.breakpoints' as *;
+@use '../02-tools/tools.breakpoint' as *;
+@use '../02-tools/tools.utilities' as *;
+@use '../02-tools/tools.generator' as generator;
+
+//
+// >> Here we generate most of the utility classes
+// inspired by bootstrap utility generator
+//
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xxxs: 0, xxs: 320px, xs: 420px, sm: 576px, md: 768px, lg: 992px, xl: 1200, xxl: 1400px, xxxl: 1600px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(xs, (xxxs: 0, xxs: 320px, xs: 420px, sm: 576px, md: 768px, lg: 992px, xl: 1200, xxl: 1400px, xxxl: 1600px))
+//    "-sm"
+/* The `breakpoint-infix` function takes in a breakpoint name and a map of breakpoints (defaulting to
+the `-breakpoints` map from the `settings.breakpoints` module). It then checks if the minimum
+breakpoint for the given name is null (i.e. if it is the smallest breakpoint), and returns a blank
+string if it is. Otherwise, it returns the breakpoint name with a dash in front, which can be used
+to create responsive utility classes. For example, if the breakpoint name is `sm` and the
+`-breakpoints` map includes breakpoints for `xs`, `sm`, and `lg`, the function would return
+`-sm`. */
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
+}
+
+// Loop over each breakpoint
+/* This code is looping over each breakpoint defined in the `-breakpoints` map and generating
+media queries for each one using the `media-up` mixin from the `tools.breakpoint` module. For each
+breakpoint, it generates a breakpoint infix using the `breakpoint-infix` function and loops over
+each utility property defined in the `` map. If the utility is enabled (i.e. not set to
+`false`) and either has responsive media queries enabled or it's the base media query, it generates
+the utility classes using the `generator.generate-utility` mixin from the `tools.generator` module,
+passing in the utility map and the breakpoint infix as arguments. This allows for the generation of
+responsive utility classes for each breakpoint. */
+@each $breakpoint in map-keys($grid-breakpoints) {
+  // Generate media query if needed
+  @include media-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    // Loop over each utility property
+    @each $key, $utility in $utilities {
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Only proceed if responsive media queries are enabled or if it's the base media query
+      @if type-of($utility) == 'map' and (map-get($utility, responsive) or $infix == '') {
+        @include generator.generate-utility($utility, $infix);
+      }
+    }
+  }
+}
+
+// RFS rescaling
+/* This code block is generating responsive font-size utilities using the RFS (Responsive Font Size)
+library. It first checks if the viewport width is greater than or equal to the `-mq-value`
+(which is a value set in the settings file). If it is, it loops over each breakpoint defined in the
+`-breakpoints` map and generates a breakpoint infix using the `breakpoint-infix` function. It
+then checks if the breakpoint value is less than the `-breakpoint` (another value set in the
+settings file) and if the `rfs` property is enabled for the utility. If both conditions are true, it
+generates the responsive font-size utility classes using the `generator.generate-utility` mixin from
+the `tools.generator` module, passing in the utility map, the breakpoint infix, and a boolean value
+of `true` to indicate that it's generating RFS utilities. */
+@media (min-width: $rfs-mq-value) {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @if (map-get($grid-breakpoints, $breakpoint) < $rfs-breakpoint) {
+      // Loop over each utility property
+      @each $key, $utility in $utilities {
+        // The utility can be disabled with `false`, thus check if the utility is a map first
+        // Only proceed if responsive media queries are enabled or if it's the base media query
+        @if type-of($utility) ==
+          'map' and
+          map-get($utility, rfs) and
+          (map-get($utility, responsive) or $infix == '')
+        {
+          @include generator.generate-utility($utility, $infix, true);
+        }
+      }
+    }
+  }
+}
+
+// Print utilities
+/* The `@media print` block is generating print-specific utility classes. It loops over each utility
+property defined in the `` map and checks if the utility is enabled (i.e. not set to
+`false`) and if it requires print styles (i.e. has the `print` property set to `true`). If both
+conditions are true, it generates the print-specific utility classes using the
+`generator.generate-utility` mixin from the `tools.generator` module, passing in the utility map and
+the `-print` infix to indicate that it's generating print-specific classes. This allows for the
+generation of print-specific utility classes that can be used to style printed documents differently
+than the screen styles. */
+@media print {
+  @each $key, $utility in $utilities {
+    // The utility can be disabled with `false`, thus check if the utility is a map first
+    // Then check if the utility needs print styles
+    @if type-of($utility) == 'map' and map-get($utility, print) == true {
+      @include generator.generate-utility($utility, '-print');
+    }
+  }
+}

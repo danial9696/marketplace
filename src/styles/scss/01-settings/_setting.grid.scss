@@ -1,0 +1,13 @@
+/* ==========================================================================
+   * Grids System Variables
+   ========================================================================== 
+*/
+@use '@styles/02-tools/tools.breakpoint' as *;
+
+// * Set the number of columns
+$grid-columns-xxs-up: 12;
+$grid-columns-sm-up: 24;
+
+// * Specify the width of the gutters
+$grid-gutter-width: 1rem !default;
+$grid-row-columns: 12 !default;

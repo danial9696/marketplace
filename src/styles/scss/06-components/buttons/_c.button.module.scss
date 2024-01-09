@@ -1,0 +1,63 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/01-settings/setting.sizing' as *;
+
+// * Default: Primary & Lg
+.c-button {
+  @include flex-center;
+  padding: 0 16px;
+  width: 100%;
+  border-radius: 2px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: var(--primary-action-btn-bg-color);
+  color: var(--primary-action-text-color);
+  transition: background-color $button-hover-time ease-in;
+
+  i {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+
+  &--xs {
+    height: map-get($btn-height, xs);
+  }
+
+  &--md {
+    height: map-get($btn-height, md);
+  }
+
+  &--sm {
+    height: map-get($btn-height, sm);
+  }
+
+  &--lg {
+    height: map-get($btn-height, lg);
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 2px solid var(--outline-action-border-color);
+  }
+
+  &--disabled {
+    background-color: var(--action-btn-disabled-color);
+    border: none;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(.c-button--outline, .c-button--disabled) {
+    background-color: var(--primary-action-hover-color);
+  }
+
+  // * Secondary
+  &--secondary {
+    background-color: var(--secondary-action-btn-bg-color);
+    color: var(--secondary-action-text-color);
+
+    &:hover {
+      background-color: var(--secondary-action-hover-color);
+    }
+  }
+}

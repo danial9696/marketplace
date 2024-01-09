@@ -1,0 +1,92 @@
+// ==========================================================================
+// Main
+// ==========================================================================
+
+/* Settings
+**
+** This holds any global settings for your project. This layer should only house settings that need to be accessed from anywhere.
+** This ensures this layer stays nice and slim, and means that most settings can be found alongside the code that uses them, making finding things far simpler.
+**
+** Examples of global settings might be things like the base font size, color palettes, config and so on.
+*/
+// ==========================================================================
+
+/* Tools
+**
+** The next layer houses your globally available tooling – namely mixins and functions. Any mixin or function that does not need accessing globally should belong in the partial to which it relates.
+** The Tools layer comes after the Settings layer because a mixin may require one of the global settings as a default parameter. Examples of global tools might be gradient mixins, font-sizing mixins and so on.
+**
+*/
+// ==========================================================================
+
+@use '@styles/02-tools/index' as tools;
+
+/* Generic
+**
+** The Generic layer is the first one that actually produces any CSS. It houses very high-level, far reaching styles. This layer is seldom modified, and is usually the same across any projects you work on.
+** It contains things like Normalize.css, global box-sizing rules, CSS resets and so on. The Generic layer affects a lot of the DOM, hence it being nice and wide in the Triangle model, and occurring very early on.
+**
+*/
+// ==========================================================================
+
+@use '@styles/03-generic/index.scss' as generic;
+
+/* Elements
+**
+** These are bare, unclassed HTML elements. What does an h1 look like without a class on it? What does an a look like without a class on it? The Elements layer binds onto bare HTML element (or 'type') selectors only.
+**
+*/
+// ==========================================================================
+
+@use '@styles/04-elements/index.scss' as elements;
+
+/* Objects
+**
+** This is the first layer in which we find class-based selectors. These are concerned with styling non-cosmetic design patterns, or 'objects'.
+** Objects can range from something as simple as a .wrapper element, to layout systems, through to things like the OOCSS poster child – the Media Object. This layer affects less of the DOM than the last layer,
+** has a higher specificity, and is slightly more explicit in that we are now targeting sections of the DOM with classes.
+**  It contains styles for non-cosmetic objects such as containers, wrappers and layout systems
+** E.g. Objects, abstractions, and design patterns (e.g. .o-layout {}). non-cosmetic styles that handle the skeletal aspect of a lot of UI components, without ever actually looking like designed ‘things’.
+**
+*/
+// ==========================================================================
+
+@use '@styles/05-objects/index.scss' as objects;
+
+/* Components
+**
+** The Components layer is where we begin to style recognisable pieces of UI. We're still binding onto classes here, so our specificity hasn't yet increased.
+** However, this layer is more explicit than the last one in that we are now styling explicit, designed pieces of the DOM.
+** We shouldn't find any selectors with a lower specificity than one class in this layer. This is where the majority of your work will happen after initial project set-up.
+**
+** E.g. Discrete, complete chunks of UI (e.g. .c-button {}).
+! We import components styles in the related components
+*/
+// ==========================================================================
+
+/* Vendors (Themes/Scopes)
+**
+** The vendors layer is where we can override possible vendors styles
+** E.g. WYSIWYG vendors, 3rd party libraries which have default styles
+** These are classes that add context to a section of the application and are   used to solve a fairly specific problem
+** A quite common example can be the html code that is entered by a user through an html text editor (such as WYSIWYG). In this content there will be no classes that follow our BEMIT format, having to apply styles to the internal nodes with some auxiliary class that allows us to have access to them. We would thus have a segment of our code free from the rest of the system, but at the same time, controlled by the scope suffix. In CSS, these rules are defined within its own scope layer.
+*/
+// ==========================================================================
+
+/* Utilities
+**
+** A layer of high-specificity selectors. It overrides all classes for specific use cases.
+**
+** E.g. .u-hidden {}, .u-d-block {}, ...
+*/
+// ==========================================================================
+
+@use '@styles/08-utilities/index.scss' as utilities;
+
+/* Templates
+**
+** This layer beats all other layers, and has the power to override anything at all that has gone before it.
+** The files are grouped by template 'page'.
+**
+*/
+// ==========================================================================

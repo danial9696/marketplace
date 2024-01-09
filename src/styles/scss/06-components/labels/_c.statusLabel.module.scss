@@ -1,0 +1,89 @@
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/01-settings/setting.sizing' as *;
+@use '@styles/02-tools/tools.flex' as *;
+
+.c-status-label {
+  @include flex-center-vertical;
+  display: inline-flex;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0 12px;
+  font-weight: 400;
+  font-size: 13px;
+  transition: all $button-hover-time ease-in;
+  height: map-get($btn-height, sm);
+  background-color: transparent;
+  color: var(--status-label-text-color);
+  border: 1px solid var(--status-label-border-color);
+
+  &--primary {
+    &:hover {
+      border-color: var(--primary-st-color);
+    }
+  }
+
+  &--success {
+    &:hover {
+      border-color: var(--success-st-color);
+    }
+  }
+
+  &--danger {
+    &:hover {
+      border-color: var(--danger-st-color);
+    }
+  }
+
+  &--warning {
+    &:hover {
+      border-color: var(--warning-st-color);
+    }
+  }
+
+  &--info {
+    &:hover {
+      border-color: var(--info-st-color);
+    }
+  }
+
+  &--detail {
+    &:hover {
+      border-color: var(--detail-st-color);
+    }
+  }
+
+  &--active {
+    border-color: transparent;
+    color: var(--white);
+    cursor: default;
+
+    &.c-status-label--primary {
+      background-color: var(--primary-st-color);
+    }
+
+    &.c-status-label--success {
+      background-color: var(--success-st-color);
+    }
+
+    &.c-status-label--danger {
+      background-color: var(--danger-st-color);
+    }
+
+    &.c-status-label--warning {
+      background-color: var(--warning-st-color);
+    }
+
+    &.c-status-label--info {
+      background-color: var(--info-st-color);
+    }
+
+    &.c-status-label--detail {
+      background-color: var(--detail-st-color);
+    }
+  }
+
+  i {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+}

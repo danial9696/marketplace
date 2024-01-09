@@ -1,0 +1,88 @@
+/* These are SCSS mixins that can be used to simplify the process of writing CSS for common layout
+styles. */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+$flex-positions: (
+  'centered': 'centered',
+  'centered-v': 'centered-v',
+  'centered-h': 'centered-h',
+  'lock-left': 'lock-left',
+  'lock-right': 'lock-right',
+  'lock-top': 'lock-top',
+  'lock-bottom': 'lock-bottom',
+  'lock-top-left': 'lock-top-left',
+  'lock-top-right': 'lock-top-right',
+  'lock-bottom-left': 'lock-bottom-left',
+  'lock-bottom-right': 'lock-bottom-right',
+);
+
+/* This is a SCSS mixin called `flex-position` that takes in an optional argument `` with a
+default value of `'lock-top-left'`. The mixin uses a map called `-positions` to determine the
+appropriate flexbox properties to apply based on the value of ``. If the value of
+`` is not found in the map, an error is thrown. The mixin can be used to easily apply
+different flexbox positioning styles to elements in a project. */
+@mixin flex-position($position: 'lock-top-left') {
+  @if map_get($flex-positions, $position) {
+    @if $position == 'centered' {
+      align-items: center;
+      justify-content: center;
+    } @else if $position == 'centered-v' {
+      align-items: center;
+    } @else if $position == 'centered-h' {
+      justify-content: center;
+    } @else if $position == 'lock-left' {
+      align-content: center;
+      align-items: center;
+      justify-content: flex-start;
+    } @else if $position == 'lock-right' {
+      align-content: center;
+      align-items: center;
+      justify-content: flex-end;
+    } @else if $position == 'lock-top' {
+      align-content: flex-start;
+      align-items: flex-start;
+      justify-content: center;
+    } @else if $position == 'lock-bottom' {
+      align-content: flex-end;
+      align-items: flex-end;
+      justify-content: center;
+    } @else if $position == 'lock-top-left' {
+      align-content: flex-start;
+      align-items: flex-start;
+      justify-content: flex-start;
+    } @else if $position == 'lock-top-right' {
+      align-content: flex-start;
+      align-items: flex-start;
+      justify-content: flex-end;
+    } @else if $position == 'lock-bottom-left' {
+      align-content: flex-end;
+      align-items: flex-end;
+      justify-content: flex-start;
+    } @else if $position == 'lock-bottom-right' {
+      align-content: flex-end;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+  } @else {
+    @error "Invalid value entered for flex-position mixin";
+  }
+}

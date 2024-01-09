@@ -1,0 +1,90 @@
+@use '@styles/01-settings/_setting.sizing.scss' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.pseudo' as pseudoFn;
+@use '@styles/02-tools/_tools.placeholder.scss' as fn;
+
+.c-sec-input {
+  @include flex-column;
+}
+
+.c-sec-input__wrapper {
+  @include flex-center-vertical;
+  height: 100%;
+  background-color: var(--primary-contact-input-bg-color);
+  border-radius: 2px;
+  border: 1px solid transparent;
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-right: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--primary-contact-input-text-color);
+    background-color: transparent;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px var(--primary-contact-input-bg-color) inset;
+    }
+
+    @include fn.placeholder {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 18px;
+      color: var(--primary-contact-input-placeholder-text-color);
+    }
+  }
+
+  &--error {
+    background-color: var(--primary-contact-input-error-bg-color);
+    border: 1px solid var(--danger-st-color);
+
+    i {
+      color: var(--danger-st-color);
+    }
+
+    input {
+      color: var(--danger-st-color);
+    }
+  }
+
+  &--lg {
+    height: #{map-get($input-height, lg)};
+  }
+
+  &--sm {
+    height: #{map-get($input-height, sm)};
+  }
+}
+
+.c-sec-input__btn {
+  @include flex-center;
+  padding: 12px;
+  height: 100%;
+
+  i {
+    transition: all $button-click-effect-time ease-in-out;
+    font-size: 24px;
+    color: var(--primary-contact-input-border-color);
+  }
+
+  &:hover {
+    i {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.c-sec-input__error {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--danger-st-color);
+  margin: 4px 4px 0 0;
+}

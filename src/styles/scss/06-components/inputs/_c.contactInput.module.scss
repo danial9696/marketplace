@@ -1,0 +1,113 @@
+@use '@styles/01-settings/_setting.sizing.scss' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.pseudo' as pseudoFn;
+@use '@styles/02-tools/_tools.placeholder.scss' as fn;
+
+.c-contact-input {
+  @include flex-column;
+}
+
+.c-contact-input__wrapper {
+  @include flex-center-vertical;
+  height: 100%;
+  height: #{map-get($input-height, sm)};
+  background-color: var(--primary-contact-input-bg-color);
+  border-radius: 2px;
+  border: 1px solid transparent;
+  transition: border-color $inputs-hover-time ease-in-out;
+
+  &--outline {
+    background-color: var(--white);
+    border: 1px solid var(--secondary-contact-input-border-color);
+  }
+
+  &:hover {
+    border-color: var(--primary-contact-input-border-color);
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-right: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--primary-contact-input-text-color);
+    background-color: transparent;
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px var(--primary-contact-input-bg-color) inset;
+    }
+
+    @include fn.placeholder {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 18px;
+      color: var(--primary-contact-input-placeholder-text-color);
+    }
+  }
+}
+
+.c-contact-input__submit {
+  @include flex-center;
+  border-right: 1px solid #a7a5a5;
+  border-radius: 2px 0px 0px 2px;
+  padding: 0 12px;
+  height: 100%;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  transition: background-color $inputs-hover-time ease-in-out;
+
+  span {
+    white-space: nowrap;
+  }
+
+  &--success {
+    background: var(--primary-st-color);
+    color: var(--primary-contact-input-text-color);
+    pointer-events: none;
+    border-right: none;
+  }
+
+  &--error {
+    background: var(--danger-st-color);
+    color: var(--white);
+    border-right: none;
+    pointer-events: none;
+  }
+
+  &--loading {
+    background-color: var(--primary-contact-input-hover-bg-color);
+  }
+
+  &:hover {
+    background-color: var(--primary-contact-input-hover-bg-color);
+  }
+
+  i {
+    font-size: 24px;
+    color: var(--primary-contact-input-border-color);
+  }
+}
+
+.c-contact-input__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  color: #ea244c;
+  margin-right: 16px;
+
+  @include pseudoFn.pseudo(before, 8px, 8px, 50%, null, null, -16px, true, '') {
+    background: #ea244c;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    border: 2px solid white;
+    outline: 1px solid #ea244c;
+  }
+}

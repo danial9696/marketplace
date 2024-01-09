@@ -1,0 +1,62 @@
+// ==========================================================================
+// * Tools / Fonts
+// ==========================================================================
+
+@use './tools.functions' as fn;
+
+// =============================================================================
+// Font Face Generator
+// https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
+// =============================================================================
+
+/* The `@mixin font-face-generator` is a Sass mixin that generates a `@font-face` rule for a given
+font. It takes in several parameters: */
+@mixin font-face-generator($name, $path, $weight: null, $style: null, $exts: otf ttf woff woff2) {
+  $src: null;
+
+  $extmods: (
+    eot: '?',
+    svg: '#' + fn.str-replace($name, ' ', '_'),
+  );
+
+  $formats: (
+    otf: 'opentype',
+    ttf: 'truetype',
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + '.' + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+// =============================================================================
+// * Responsive Font Size Generator
+// =============================================================================
+
+/* The `@mixin font-size` is a Sass mixin that generates responsive font sizes based on a map of
+breakpoints and font sizes. It takes in a map as a parameter, where the keys are the breakpoints and
+the values are the font sizes. For each breakpoint and font size pair in the map, it generates a CSS
+rule that sets the font size to the specified value. If the breakpoint is null, it generates a CSS
+rule that sets the font size to the specified value without any media query. If the breakpoint is
+not null, it generates a CSS rule that sets the font size to the specified value within a media
+query that targets screens with a minimum width equal to the breakpoint. */
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    } @else {
+      @media screen and (min-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}

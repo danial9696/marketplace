@@ -1,0 +1,32 @@
+/* ==========================================================================
+   * Container Settings
+   ========================================================================== 
+*/
+
+@use '@styles/01-settings/setting.grid' as *;
+
+// ! Marketplace sizing & grid system => 24 col / 12 col
+// * Name	Size	Container	#-of-Cols	Gutter-Width	Margin
+// * xxs	320	  320	      12	      16	          8
+// * xs	  420	  420	      12	      16	          8
+// * sm	  576	  540	      12	      16	          8
+// * md	  768	  720	      24	      16	          8
+// * lg	  992	  960	      24	      16	          8
+// * xl	  1200	1140	    24	      16	          8
+// * xxl	1400	1320	    24	      16	          8
+// * 3xl	1600	1320	    24	      16	          8
+
+$container-padding-x: $grid-gutter-width !default;
+
+// * Start - Containers max-width
+$container-max-widths: (
+  xxs: 320px,
+  xs: 420px,
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 1320px,
+) !default;
+// * End - Containers max-width

@@ -1,0 +1,72 @@
+.c-puzzle-banner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: 300ms;
+  cursor: pointer;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+
+  &:hover {
+    .c-puzzle-banner__title {
+      transform: inherit;
+    }
+  }
+
+  &--flip {
+    --rotate-y: 180deg;
+  }
+}
+
+.c-puzzle-banner__link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+
+.c-puzzle-banner__img {
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+
+  &--front {
+    left: 0;
+  }
+
+  &--back {
+    transform: rotateY(180deg);
+  }
+}
+
+.c-puzzle-banner__img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.c-puzzle-banner__title {
+  font-family: 'Morabba';
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--white);
+  margin-bottom: -32px;
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 46px;
+  padding: 0 8px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

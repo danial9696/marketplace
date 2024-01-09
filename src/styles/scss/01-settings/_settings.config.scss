@@ -1,0 +1,79 @@
+/* ==========================================================================
+   * Config Variables
+   ========================================================================== 
+*/
+
+// These variables must act as constants, hence the uppercase
+$ENV: 'dev';
+
+// ==========================================================================
+// Settings / Config
+// ==========================================================================
+
+// Path is relative to the stylesheets directory.
+$assets-path: '../' !default;
+
+// Typefaces
+// =============================================================================
+$font-p: 'sourcesanspro';
+$font-headings: $font-p;
+
+// Typography
+// =============================================================================
+// Base
+$global-font-size: 16px;
+$global-line-height: 24px / $global-font-size;
+$font-family: $font-p;
+
+$p-font-sizes: (
+  null: $global-font-size,
+  medium: 17px,
+  large: 19px,
+  xlarge: 21px,
+);
+
+// Weights
+$light: 300;
+$normal: 400;
+$medium: 600;
+$bold: 700;
+
+// Headings
+$font-size-h1: 36px !default;
+$font-size-h2: 28px !default;
+$font-size-h3: 24px !default;
+$font-size-h4: 20px !default;
+$font-size-h5: 18px !default;
+$font-size-h6: 16px !default;
+$line-height-h: $global-line-height;
+$h-increase: 1.25;
+
+$h1-font-sizes: (
+  null: $font-size-h1,
+  large: 70px,
+);
+
+$h2-font-sizes: (
+  null: $font-size-h2,
+  large: $font-size-h2 * $h-increase,
+);
+
+$h3-font-sizes: (
+  null: $font-size-h3,
+  large: $font-size-h3 * $h-increase,
+);
+
+$h4-font-sizes: (
+  null: $font-size-h4,
+  large: $font-size-h4 * $h-increase,
+);
+
+$h5-font-sizes: (
+  null: $font-size-h5,
+  large: $font-size-h5 * $h-increase,
+);
+
+$h6-font-sizes: (
+  null: $font-size-h6,
+  large: $font-size-h6 * $h-increase,
+);

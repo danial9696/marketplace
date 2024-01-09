@@ -1,0 +1,152 @@
+/* ==========================================================================
+   * Color Variables
+   ========================================================================== 
+*/
+
+// * Start - Primary Colors
+$white: #ffffff;
+$black: #000000;
+
+$blacks: (
+  black-darker-600: #0e0c0c,
+  black-darker-300: #181516,
+  black-base: #221e1f,
+  black-lighter-100: #383535,
+  black-lighter-300: #646262,
+  black-lighter-500: #918f8f,
+  black-lighter-600: #a7a5a5,
+);
+
+$yellows: (
+  yellow-darker-300: #b19206,
+  yellow-darker-100: #e4bb07,
+  yellow-base: #fdd008,
+  yellow-lighter-200: #fdd939,
+  yellow-lighter-400: #fee36b,
+  yellow-lighter-600: #feec9c,
+  yellow-lighter-700: #fff4c3,
+);
+// * End - Primary Colors
+
+// * Start - Background Colors
+
+$grays: (
+  gray-darker-400: #969696,
+  gray-darker-300: #afafaf,
+  gray-darker-200: #c8c8c8,
+  gray-darker-100: #e1e1e1,
+  gray-base: #fafafa,
+  gray-lighter-900: #ffffff,
+);
+
+// * End - Background Colors
+
+// * Start - Secondary Colors
+
+$purples: (
+  purple-darker-600: #24164e,
+  purple-darker-400: #362175,
+  purple-darker-200: #482c9c,
+  purple-base: #5a37c3,
+  purple-lighter-200: #7b5fcf,
+  purple-lighter-300: #9c87db,
+  purple-lighter-600: #bdafe7,
+);
+
+$pinks: (
+  pink-darker-600: #621836,
+  pink-darker-400: #922350,
+  pink-darker-200: #c32f6b,
+  pink-base: #f43b86,
+  pink-lighter-200: #f6629e,
+  pink-lighter-400: #f889b6,
+  pink-lighter-600: #fbb1cf,
+);
+
+$blues: (
+  blue-darker-400: #1c5067,
+  blue-darker-200: #256b89,
+  blue-darker-100: #29799a,
+  blue-base: #2e86ab,
+  blue-lighter-100: #4392b3,
+  blue-lighter-200: #589ebc,
+  blue-lighter-400: #82b6cd,
+);
+
+$greens: (
+  green-darker-400: #0e7a40,
+  green-darker-200: #108b4a,
+  green-darker-100: #129d53,
+  green-base: #14ae5c,
+  green-lighter-100: #2cb66c,
+  green-lighter-200: #43be7d,
+  green-lighter-400: #5bc68d,
+);
+
+$reds: (
+  red-darker-600: #5e0e1e,
+  red-darker-400: #8c162e,
+  red-darker-200: #dc143c,
+  red-base: #ea244c,
+  red-lighter-100: #ec3a5e,
+  red-lighter-200: #ee5070,
+  red-lighter-400: #f27c94,
+  red-lighter-600: #ffe1e7,
+);
+// * End - Secondary Colors
+
+// * Start - Status colors
+$status-colors: (
+  primary: map-get($yellows, yellow-base),
+  dark: map-get($blacks, black-base),
+  light: map-get($grays, gray-base),
+  success: map-get($greens, green-base),
+  danger: map-get($reds, red-base),
+  info: map-get($blues, blue-base),
+  warning: map-get($pinks, pink-base),
+  detail: map-get($purples, purple-base),
+  neutral: map-get($blacks, black-lighter-500),
+);
+// * End - Status colors
+
+// * Start - Utility colors classes
+
+$u-color: (
+  'color': (
+    property: color,
+    class: text,
+    local-vars: (
+      'text-opacity': 1,
+    ),
+    values: (
+      primary: map-get($yellows, yellow-base),
+      dark: map-get($blacks, black-base),
+      light: map-get($grays, gray-base),
+      success: map-get($greens, green-base),
+      danger: map-get($reds, red-base),
+      info: map-get($blues, blue-base),
+      warning: map-get($pinks, pink-base),
+      detail: map-get($purples, purple-base),
+      neutral: map-get($blacks, black-lighter-500),
+    ),
+  ),
+);
+
+$u-bg-color: (
+  'background-color': (
+    property: background-color,
+    class: bg,
+    local-vars: (
+      'bg-opacity': 1,
+    ),
+    // values:
+    //   map-merge(
+    //     $utilities-bg-colors,
+    //     (
+    //       'transparent': transparent
+    //     )
+    //   ),,,,,,,,,,,,,,,,,
+  ),
+);
+
+// * End - Utility colors classes

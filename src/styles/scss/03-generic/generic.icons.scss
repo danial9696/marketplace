@@ -1,0 +1,417 @@
+@use '@styles/01-settings/setting.icons' as *;
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src: url('../../../../public/fonts/icons/marketplace.eot?fxkqfy');
+  src: url('../../../../public/fonts/icons/marketplace.eot?fxkqfy#iefix')
+      format('embedded-opentype'),
+    url('../../../../public/fonts/icons/marketplace.ttf?fxkqfy') format('truetype'),
+    url('../../../../public/fonts/icons/marketplace.woff?fxkqfy') format('woff'),
+    url('../../../../public/fonts/icons/marketplace.svg?fxkqfy##{$icomoon-font-family}')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='ic-'],
+[class*=' ic-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-sort-desc {
+  &:before {
+    content: $ic-sort-desc;
+  }
+}
+.ic-sort-asc {
+  &:before {
+    content: $ic-sort-asc;
+  }
+}
+.ic-arr-up {
+  &:before {
+    content: $ic-arr-up;
+  }
+}
+.ic-arr-down {
+  &:before {
+    content: $ic-arr-down;
+  }
+}
+.ic-arr-right {
+  &:before {
+    content: $ic-arr-right;
+  }
+}
+.ic-arr-left {
+  &:before {
+    content: $ic-arr-left;
+  }
+}
+.ic-arr-chev-right {
+  &:before {
+    content: $ic-arr-chev-right;
+  }
+}
+.ic-arr-chev-left {
+  &:before {
+    content: $ic-arr-chev-left;
+  }
+}
+.ic-arr-chev-down {
+  &:before {
+    content: $ic-arr-chev-down;
+  }
+}
+.ic-arr-chev-up {
+  &:before {
+    content: $ic-arr-chev-up;
+  }
+}
+.ic-minus {
+  &:before {
+    content: $ic-minus;
+  }
+}
+.ic-plus {
+  &:before {
+    content: $ic-plus;
+  }
+}
+.ic-close {
+  &:before {
+    content: $ic-close;
+  }
+}
+.ic-search {
+  &:before {
+    content: $ic-search;
+  }
+}
+.ic-pin {
+  &:before {
+    content: $ic-pin;
+  }
+}
+.ic-mail {
+  &:before {
+    content: $ic-mail;
+  }
+}
+.ic-credit {
+  &:before {
+    content: $ic-credit;
+  }
+}
+.ic-clock {
+  &:before {
+    content: $ic-clock;
+  }
+}
+.ic-exit {
+  &:before {
+    content: $ic-exit;
+  }
+}
+.ic-fav {
+  &:before {
+    content: $ic-fav;
+  }
+}
+.ic-shopping-cart {
+  &:before {
+    content: $ic-shopping-cart;
+  }
+}
+.ic-Wallet {
+  &:before {
+    content: $ic-Wallet;
+  }
+}
+.ic-eyes-slash {
+  &:before {
+    content: $ic-eyes-slash;
+  }
+}
+.ic-eyes {
+  &:before {
+    content: $ic-eyes;
+  }
+}
+.ic-avatar {
+  &:before {
+    content: $ic-avatar;
+  }
+}
+.ic-plus-circle {
+  &:before {
+    content: $ic-plus-circle;
+  }
+}
+.ic-trash {
+  &:before {
+    content: $ic-trash;
+  }
+}
+.ic-warning {
+  &:before {
+    content: $ic-warning;
+  }
+}
+.ic-audio {
+  &:before {
+    content: $ic-audio;
+  }
+}
+.ic-battery {
+  &:before {
+    content: $ic-battery;
+  }
+}
+.ic-bluetooth {
+  &:before {
+    content: $ic-bluetooth;
+  }
+}
+.ic-camera {
+  &:before {
+    content: $ic-camera;
+  }
+}
+.ic-cpu {
+  &:before {
+    content: $ic-cpu;
+  }
+}
+.ic-screen {
+  &:before {
+    content: $ic-screen;
+  }
+}
+.ic-mobile {
+  &:before {
+    content: $ic-mobile;
+  }
+}
+.ic-port {
+  &:before {
+    content: $ic-port;
+  }
+}
+.ic-headphone {
+  &:before {
+    content: $ic-headphone;
+  }
+}
+.ic-game {
+  &:before {
+    content: $ic-game;
+  }
+}
+.ic-ram {
+  &:before {
+    content: $ic-ram;
+  }
+}
+.ic-simcard {
+  &:before {
+    content: $ic-simcard;
+  }
+}
+.ic-watch {
+  &:before {
+    content: $ic-watch;
+  }
+}
+.ic-mouse {
+  &:before {
+    content: $ic-mouse;
+  }
+}
+.ic-laptop {
+  &:before {
+    content: $ic-laptop;
+  }
+}
+.ic-Storage {
+  &:before {
+    content: $ic-Storage;
+  }
+}
+.ic-Wifi {
+  &:before {
+    content: $ic-Wifi;
+  }
+}
+.ic-tick-circle {
+  &:before {
+    content: $ic-tick-circle;
+  }
+}
+.ic-adv {
+  &:before {
+    content: $ic-adv;
+  }
+}
+.ic-dis-adv {
+  &:before {
+    content: $ic-dis-adv;
+  }
+}
+.ic-half-star {
+  &:before {
+    content: $ic-half-star;
+  }
+}
+.ic-fill-star {
+  &:before {
+    content: $ic-fill-star;
+  }
+}
+.ic-star {
+  &:before {
+    content: $ic-star;
+  }
+}
+.ic-like {
+  &:before {
+    content: $ic-like;
+  }
+}
+.ic-dislike {
+  &:before {
+    content: $ic-dislike;
+  }
+}
+.ic-dot {
+  &:before {
+    content: $ic-dot;
+  }
+}
+.ic-share {
+  &:before {
+    content: $ic-share;
+  }
+}
+.ic-comparison {
+  &:before {
+    content: $ic-comparison;
+  }
+}
+.ic-chart {
+  &:before {
+    content: $ic-chart;
+  }
+}
+.ic-Frame-1468 {
+  &:before {
+    content: $ic-Frame-1468;
+  }
+}
+.ic-notif {
+  &:before {
+    content: $ic-notif;
+  }
+}
+.ic-flame {
+  &:before {
+    content: $ic-flame;
+  }
+}
+.ic-circle-fill {
+  &:before {
+    content: $ic-circle-fill;
+  }
+}
+.ic-Frame-2173 {
+  &:before {
+    content: $ic-Frame-2173;
+  }
+}
+.ic-lightning {
+  &:before {
+    content: $ic-lightning;
+  }
+}
+.ic-trophy {
+  &:before {
+    content: $ic-trophy;
+  }
+}
+.ic-truck {
+  &:before {
+    content: $ic-truck;
+  }
+}
+.ic-bell {
+  &:before {
+    content: $ic-bell;
+  }
+}
+.ic-flag {
+  &:before {
+    content: $ic-flag;
+  }
+}
+.ic-gift {
+  &:before {
+    content: $ic-gift;
+  }
+}
+.ic-sale {
+  &:before {
+    content: $ic-sale;
+  }
+}
+.ic-about-us {
+  &:before {
+    content: $ic-about-us;
+  }
+}
+.ic-installment {
+  &:before {
+    content: $ic-installment;
+  }
+}
+.ic-blog {
+  &:before {
+    content: $ic-blog;
+  }
+}
+.ic-contact {
+  &:before {
+    content: $ic-contact;
+  }
+}
+.ic-hamburger {
+  &:before {
+    content: $ic-hamburger;
+  }
+}
+.ic-tag {
+  &:before {
+    content: $ic-tag;
+  }
+}
+.ic-network {
+  &:before {
+    content: $ic-network;
+  }
+}
+.ic-telephone {
+  &:before {
+    content: $ic-telephone;
+  }
+}

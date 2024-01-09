@@ -1,0 +1,58 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.breakpoint' as *;
+
+.c-spec-table__maintitle {
+  @include flex-center-vertical;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: #383535;
+
+  i {
+    font-size: 24px;
+    color: #14ae5c;
+    margin-left: 8px;
+  }
+}
+
+.c-spec-table__container {
+  width: 100%;
+
+  &--bordered {
+    border: 1px solid #afafaf;
+    border-radius: 2px;
+  }
+}
+
+.c-spec-table__item {
+  &:not(:last-child) {
+    border-bottom: 0.3px solid #afafaf;
+  }
+
+  td {
+    &:first-child {
+      border-left: 0.3px solid #afafaf;
+    }
+  }
+}
+
+.c-spec-table__item-title {
+  color: #918f8f;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.c-spec-table__item-value {
+  color: #646262;
+  font-weight: 300;
+
+  @include media-up(xxs) {
+    font-size: 12px;
+    line-height: 23px;
+  }
+  @include media-up(sm) {
+    font-size: 13px;
+    line-height: 18px;
+  }
+}

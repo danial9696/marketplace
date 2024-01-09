@@ -1,0 +1,173 @@
+@use '../01-settings/settings.breakpoints' as *;
+
+// Breakpoint viewport sizes and media queries.
+
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)
+//
+// The map defined in the `$grid-breakpoints` _settings.breakpoints.scss is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl xxl))
+//    md
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @if not $n {
+    @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+  }
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    576px
+/* The `@function breakpoint-min` is a Sass function that takes two arguments: `` and
+``. It returns the minimum width of the breakpoint with the given `` from the
+`` map. If the minimum width is 0, it returns `null`. */
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width.
+// The maximum value is reduced by 0.02px to work around the limitations of
+// `min-` and `max-` prefixes and viewports with fractional widths.
+// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+// See https://bugs.webkit.org/show_bug.cgi?id=178261
+//
+//    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    767.98px
+/* The `@function breakpoint-max` is a Sass function that takes two arguments: `` and
+``. It returns the maximum width of the breakpoint with the given `` from the
+`` map. The maximum value is reduced by 0.02px to work around the limitations of `min-`
+and `max-` prefixes and viewports with fractional widths. If the maximum width is 0 or not defined,
+it returns `null`. This function is used to generate media queries that apply to the given
+breakpoint and narrower. */
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $max: map-get($breakpoints, $name);
+  @return if($max and $max > 0, $max - 0.02, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    "-sm"
+/* The `@function breakpoint-infix` is a Sass function that takes two arguments: `` and
+``. It returns a blank string if the smallest breakpoint is passed as ``, otherwise
+it returns the name with a dash in front. This function is useful for making responsive utilities.
+For example, if the `` argument is `sm` and the `` argument is `(xs: 0, sm: 576px,
+md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)`, the function will return `-sm`. */
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+/* The `@mixin media-up` is a Sass mixin that takes two arguments: `` and ``. It
+generates a media query that applies to the given breakpoint and wider. It first calculates the
+minimum width of the breakpoint using the `breakpoint-min` function, and then generates a media
+query using the `@media` rule with a `min-width` property set to the minimum width. If the minimum
+width is not defined (i.e., the smallest breakpoint), it applies the `@content` without a media
+query. This mixin is useful for applying styles to a specific breakpoint and wider. */
+@mixin media-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+/* The `@mixin media-down` is a Sass mixin that generates a media query that applies to the given
+breakpoint and narrower. It first calculates the maximum width of the breakpoint using the
+`breakpoint-max` function, and then generates a media query using the `@media` rule with a
+`max-width` property set to the maximum width. If the maximum width is not defined (i.e., the
+largest breakpoint), it applies the `@content` without a media query. This mixin is useful for
+applying styles to a specific breakpoint and narrower. */
+@mixin media-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+/* The `@mixin media-between` is a Sass mixin that generates a media query that applies to viewports
+between two breakpoints. It takes three arguments: `` and `` are the names of the lower
+and upper breakpoints, respectively, and `` is a map of breakpoint names and their
+minimum widths. */
+@mixin media-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+/* The `@mixin media-only` is a Sass mixin that generates a media query that applies only to the given
+breakpoint, not viewports any wider or narrower. It first calculates the minimum and maximum widths
+of the breakpoint using the `breakpoint-min` and `breakpoint-max` functions, respectively. If both
+the minimum and maximum widths are defined, it generates a media query using the `@media` rule with
+`min-width` and `max-width` properties set to the minimum and maximum widths, respectively. If the
+maximum width is not defined (i.e., the largest breakpoint), it applies the `@content` using the
+`media-up` mixin with the given breakpoint name. If the minimum width is not defined (i.e., the
+smallest breakpoint), it applies the `@content` using the `media-down` mixin with the name of the
+next breakpoint. This mixin is useful for applying styles to a specific breakpoint without affecting
+viewports wider or narrower than that breakpoint. */
+@mixin media-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $next: breakpoint-next($name, $breakpoints);
+  $max: breakpoint-max($next, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-down($next, $breakpoints) {
+      @content;
+    }
+  }
+}

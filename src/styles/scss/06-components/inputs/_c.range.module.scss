@@ -1,0 +1,38 @@
+@use '@styles/01-settings/_setting.sizing.scss' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.pseudo' as pseudoFn;
+@use '@styles/02-tools/_tools.placeholder.scss' as fn;
+
+.c-range {
+  @include flex-center;
+  background-color: var(--white);
+
+  &:focus-within {
+    .c-range__wrapper {
+      border: 1px solid var(--range-border-focus-color);
+    }
+  }
+}
+
+.c-range__wrapper {
+  @include flex-center-vertical;
+  border: 1px solid var(--range-border-color);
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  height: map-get($input-height, xs);
+  color: var(--range-text-color);
+  padding: 4px 6px;
+
+  input {
+    border: none;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 18px;
+    color: var(--range-text-color);
+    font-family: 'iranSansXNum';
+    height: 100%;
+  }
+}

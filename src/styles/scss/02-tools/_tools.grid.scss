@@ -1,0 +1,135 @@
+/* ==========================================================================
+   * Grid System Tools
+   ========================================================================== 
+*/
+
+@use '@styles/01-settings/settings.spacing' as *;
+@use '@styles/01-settings/setting.container' as *;
+@use '@styles/01-settings/settings.breakpoints' as *;
+@use '@styles/01-settings/settings.global' as *;
+@use '@styles/01-settings/setting.grid' as *;
+
+@use '@styles/02-tools/tools.functions' as *;
+
+// * Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+/* The `@mixin assert-ascending` is a Sass mixin that checks if a Sass map is in ascending order. It
+takes two parameters: `` which is the Sass map to be checked, and `-name` which is a string
+representing the name of the map being checked. */
+@mixin assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null or unit($num) == '%' or unit($prev-num) == '%' {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+// * Ascending starts at zero
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+/* The `@mixin assert-starts-at-zero` is a Sass mixin that checks if the first breakpoint in a Sass map
+(usually the grid breakpoints) starts at 0. It takes two parameters: `` which is the Sass map to
+be checked, and `-name` which is a string representing the name of the map being checked
+(default value is `-breakpoints`). If the first value in the map is not 0, a warning is thrown
+indicating that the first breakpoint in the map must start at 0. */
+@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
+  @if length($map) > 0 {
+    $values: map-values($map);
+    $first-value: nth($values, 1);
+    @if $first-value != 0 {
+      @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+    }
+  }
+}
+
+/* The `@mixin make-row` is creating a row container for a grid system. It takes an optional parameter
+`` which defaults to the value of `-gutter-width` (the width of the gutters between
+columns in the grid system). */
+@mixin make-row($gutter: $grid-gutter-width) {
+  --#{$prefix}gutter-x: #{$gutter};
+  --#{$prefix}gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--#{$prefix}gutter-y));
+  margin-right: calc(-0.5 * var(--#{$prefix}gutter-x));
+  margin-left: calc(-0.5 * var(--#{$prefix}gutter-x));
+}
+
+/* The `@mixin make-col-ready()` is a Sass mixin that sets up the initial styling for a column in a
+grid system. It sets the `box-sizing` property to `border-box` if the variable
+`-column-box-sizing` is defined and true, otherwise it sets it to `null`. It also sets
+`flex-shrink` to `0`, `width` to `100%`, `max-width` to `100%`, `padding-right` and `padding-left`
+to half of the `gutter-x` variable, and `margin-top` to the `gutter-y`
+variable. This mixin is used as a base for other mixins that define specific column sizes and
+offsets. */
+@mixin make-col-ready() {
+  // * Add box sizing if only the grid is loaded
+  box-sizing: if(
+    variable-exists(include-column-box-sizing) and $include-column-box-sizing,
+    border-box,
+    null
+  );
+  // ! Prevent columns from becoming too narrow when at smaller grid tiers by
+  // always setting `width: 100%;`. This works because we set the width
+  // later on to override this initial width.
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%; // ! Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid
+  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5);
+  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5);
+  margin-top: var(--#{$prefix}gutter-y);
+}
+
+/* The `@mixin make-col` is a Sass mixin that sets up the styling for a column in a grid system. It
+takes two optional parameters: `` which defaults to `false` and represents the size of the
+column, and `` which defaults to `-columns` and represents the total number of columns
+in the grid system. If `` is truthy, it sets the `flex` property to `0 0 auto` and the `width`
+property to a percentage value calculated by dividing `` by ``. If `` is falsy, it
+sets the `flex` property to `1 1 0` and the `max-width` property to `100%`. This mixin is used to
+define specific column sizes in a grid system. */
+@mixin make-col($size: false, $columns: $grid-columns) {
+  @if $size {
+    flex: 0 0 auto;
+    width: percentage(divide($size, $columns));
+  } @else {
+    flex: 1 1 0;
+    max-width: 100%;
+  }
+}
+
+/* The `@mixin make-col-auto()` is a Sass mixin that sets up the styling for a column in a grid system
+with an automatic width. It sets the `flex` property to `0 0 auto` and the `width` property to
+`auto`. This mixin is used to define a column that takes up the remaining space in a row after other
+columns have been sized. */
+@mixin make-col-auto() {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+@mixin make-col-offset($size, $columns: $grid-columns) {
+  $num: divide($size, $columns);
+  margin-left: if($num == 0, 0, percentage($num));
+}
+
+// * Row columns
+// * Specify on a parent element(e.g., .row) to force immediate children into NN
+// number of columns. Supports wrapping to new lines, but does not do a Masonry
+// style grid.
+/* The `@mixin row-cols()` is a Sass mixin that sets the number of columns for immediate children
+of a parent element with the class `.row`. It takes one parameter, ``, which represents the
+number of columns. The mixin sets the `flex` property to `0 0 auto` and the `width` property to a
+percentage value calculated by dividing `100%` by ``. This allows the immediate children to be
+evenly spaced across the parent element in the specified number of columns. */
+@mixin row-cols($count) {
+  > * {
+    flex: 0 0 auto;
+    width: divide(100%, $count);
+  }
+}

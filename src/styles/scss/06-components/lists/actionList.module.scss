@@ -1,0 +1,142 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.breakpoint' as *;
+@use '@styles/02-tools/tools.pseudo' as fn;
+
+.c-action-list {
+  border: 1px solid #c8c8c8;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.c-action-list__header {
+  @include flex-center-vertical;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.c-action-list__header-title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #646262;
+}
+
+.c-action-list__item {
+  border-bottom: 1px solid #c8c8c8;
+
+  &:last-child {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: none;
+  }
+}
+
+.c-action-list__item-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.c-action-list__item-info {
+  @include flex-center-vertical;
+  max-width: 100%;
+  margin-right: 8px;
+
+  @include media-up(xxs) {
+    order: 0;
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  @include media-up(sm) {
+    width: fit-content;
+    gap: 36px;
+    flex-direction: row;
+  }
+
+  li {
+    font-weight: 400;
+
+    color: #5a37c3;
+
+    @include fn.pseudo(before, 3px, 3px, 50%, null, null, -8px, true, '') {
+      transform: translateY(-50%);
+      background-color: #5a37c3;
+      border-radius: 50%;
+    }
+
+    @include media-up(xxs) {
+      font-size: 12px;
+      line-height: 16px;
+
+      &:first-child {
+        margin-bottom: 12px;
+      }
+    }
+
+    @include media-up(sm) {
+      margin-bottom: 0;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+
+  b {
+    margin-left: 4px;
+  }
+
+  span {
+    font-family: 'iranSansXNum';
+  }
+}
+
+.c-action-list__item-btn {
+  @include flex-center-vertical;
+  width: fit-content;
+  height: 24px;
+  gap: 12px;
+
+  button {
+    @include flex-center;
+  }
+
+  &--delete {
+    i {
+      color: #ea244c;
+      font-size: 28px;
+    }
+  }
+
+  &--custom {
+    font-size: 20px;
+    color: #2e86ab;
+  }
+
+  @include media-up(xxs) {
+    order: 2;
+  }
+
+  @include media-up(sm) {
+    order: 1;
+  }
+}
+
+.c-action-list__item-description {
+  color: #383535;
+  font-weight: 500;
+
+  @include media-up(xxs) {
+    width: 75%;
+    order: 1;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  @include media-up(sm) {
+    width: 100%;
+    font-size: 14px;
+    line-height: 19px;
+  }
+}

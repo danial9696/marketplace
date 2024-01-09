@@ -1,0 +1,96 @@
+/* ==========================================================================
+   * Sizing options & Utility Vars
+   ========================================================================== 
+*/
+
+$scrollbar-size: 4px;
+
+// * Start - All buttons sizes
+$btn-height: (
+  lg: 56px,
+  md: 44px,
+  sm: 36px,
+  xs: 32px,
+);
+// * End - All buttons sizes
+
+// * Start - All input sizes
+$input-height: (
+  lg: 40px,
+  md: 36px,
+  sm: 32px,
+  xs: 24px,
+);
+// * End - All input sizes
+
+$u-width: (
+  'width': (
+    property: width,
+    class: u-w,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+);
+
+$u-max-width: (
+  'width': (
+    property: width,
+    class: u-mx-w,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+);
+
+$u-vw-width: (
+  'viewport-width': (
+    property: width,
+    class: u-vw,
+    values: (
+      100: 100vw,
+    ),
+  ),
+);
+
+$u-height: (
+  'height': (
+    property: height,
+    class: u-h,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+);
+
+$u-max-height: (
+  'max-height': (
+    property: max-height,
+    class: u-mh,
+    values: (
+      100: 100%,
+    ),
+  ),
+);
+
+$u-vw-height: (
+  'viewport-height': (
+    property: height,
+    class: u-vh,
+    values: (
+      100: 100vh,
+    ),
+  ),
+);

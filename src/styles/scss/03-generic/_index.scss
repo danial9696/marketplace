@@ -1,0 +1,10 @@
+// ! We import fonts as seprate global file
+
+/* The `@use` rule is used to import and include Sass modules in a file. In this code, it is importing
+several Sass modules from different files and assigning them aliases for easier use within the
+current file. */
+@use './generic.normalize' as normalize;
+@use './generic.reset' as reset;
+@use './generic.colors' as colors;
+@use './generic.box-sizing' as box-sizing;
+@use './generic.media' as media;

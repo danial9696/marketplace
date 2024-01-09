@@ -1,0 +1,91 @@
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.pseudo' as *;
+
+.c-check {
+  @include flex-center-vertical;
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: border-color $inputs-hover-time ease-in;
+
+  // * Default
+  &--success {
+    --checkbox-selected-color: var(--success-st-color);
+  }
+
+  &--primary {
+    --checkbox-selected-color: var(--primary-st-color);
+  }
+
+  &--danger {
+    --checkbox-selected-color: var(--danger-st-color);
+  }
+
+  &--warning {
+    --checkbox-selected-color: var(--warning-st-color);
+  }
+
+  &--info {
+    --checkbox-selected-color: var(--info-st-color);
+  }
+
+  &--detail {
+    --checkbox-selected-color: var(--detail-st-color);
+  }
+
+  &--disabled {
+    .c-check__label {
+      color: var(--checkbox-disabled-color);
+
+      &::before {
+        border-color: var(--checkbox-disabled-color);
+      }
+    }
+  }
+
+  &:hover:not(.c-check--disabled) {
+    .c-check__indicator::before {
+      border: 1px solid var(--checkbox-selected-color);
+    }
+  }
+}
+
+.c-check__label {
+  font-family: 'iranSansXFaNum', sans-serif;
+  color: var(--checkbox-text-color);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  z-index: 100;
+  cursor: pointer;
+  padding-right: 8px;
+  transition: border-color $inputs-hover-time ease-in-out;
+}
+
+.c-check__indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+
+  @include pseudo(before, 16px, 16px, 0, 0, null, null, true, '') {
+    border: 1px solid var(--checkbox-border-color);
+    border-radius: 2px;
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--checkbox-selected-color);
+
+    &::before {
+      border: 1px solid transparent;
+    }
+  }
+
+  i {
+    color: var(--white);
+  }
+}

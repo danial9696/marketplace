@@ -1,0 +1,57 @@
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/02-tools/tools.flex' as *;
+
+// * Default: Primary
+.c-link-button {
+  @include flex-center-vertical;
+
+  i {
+    margin-right: 8px;
+  }
+
+  &--primary {
+    .c-link-button__title {
+      color: var(--primary-link-color);
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    i {
+      font-size: 20px;
+      color: var(--primary-link-color);
+    }
+
+    &:hover {
+      .c-link-button__title {
+        color: var(--primary-link-hover-color);
+      }
+
+      i {
+        color: var(--primary-link-hover-color);
+      }
+    }
+  }
+
+  &--secondary {
+    .c-link-button__title {
+      color: var(--secondary-link-color);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    i {
+      font-size: 24px;
+      color: var(--secondary-link-color);
+    }
+
+    &:hover {
+      .c-link-button__title {
+        color: var(--secondary-link-hover-color);
+      }
+
+      i {
+        color: var(--secondary-link-hover-color);
+      }
+    }
+  }
+}

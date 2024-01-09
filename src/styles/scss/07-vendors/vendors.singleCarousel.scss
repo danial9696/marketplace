@@ -1,0 +1,73 @@
+// ! Override the default styles of react-multi-carousel package.
+// * Here we override the default styles for the single carousel component
+
+.react-multi-carousel-track {
+  height: 100%;
+  position: relative;
+}
+
+.react-multiple-carousel__arrow {
+  height: 44px;
+  width: 42px;
+  background-color: var(--carousel-arrow-bg-color);
+  border-radius: 50%;
+  box-shadow: 0 4px 30px var(--carousel-arrow-shadow);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-image: var(--carousel-arrow-border);
+  border-width: 1px;
+  border-style: solid;
+
+  &--left {
+    right: -20px !important;
+    left: initial;
+
+    &::before {
+      position: absolute;
+      right: 66%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      font-size: 10px;
+      color: var(--carousel-arrow-icon-color);
+    }
+
+    &:hover {
+      background-color: var(--white);
+      outline: 7.5px solid var(--carousel-arrow-outline-bg-color);
+    }
+  }
+
+  &--right {
+    left: -20px !important;
+    right: initial;
+
+    &::before {
+      position: absolute;
+      left: 66%;
+      top: 50%;
+      font-size: 10px;
+      transform: translate(-50%, -50%);
+      color: var(--carousel-arrow-icon-color);
+    }
+
+    &:hover {
+      background-color: var(--white);
+      outline: 7.5px solid var(--carousel-arrow-outline-bg-color);
+    }
+  }
+}
+
+.react-multi-carousel-dot {
+  &--active {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 2px;
+
+    button {
+      height: 9px;
+      border: none;
+      border-radius: 20px;
+      background-color: var(--white);
+    }
+  }
+}

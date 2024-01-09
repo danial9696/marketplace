@@ -1,0 +1,111 @@
+// ==========================================================================
+// * Utilities / Headings
+// ==========================================================================
+
+@use '../01-settings/setting.heading' as *;
+@use '../02-tools/tools.breakpoint' as *;
+@use '../02-tools/tools.mixins' as fn;
+
+//  * Redefine all of our basic heading styles against utility classes so as to
+//  * allow for double stranded heading hierarchy, e.g. we semantically need an H2,
+//  * but we want it to be sized like an H1:
+//  *
+//  *   <h2 class="u-h1"></h2>
+//  *
+//  */
+
+.u-h {
+  display: block;
+}
+
+// ! Extra Large title
+.u-h1 {
+  @extend .u-h;
+  @include fn.responsive-font-size($h1-font-size);
+
+  @include media-up(xxxs) {
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  @include media-up(xxs) {
+    margin-bottom: 24px;
+  }
+
+  @include media-up(xs) {
+    font-weight: 600;
+    margin-bottom: 36px;
+  }
+}
+
+// ! Large title
+.u-h2 {
+  @extend .u-h;
+  @include fn.responsive-font-size($h2-font-size);
+
+  @include media-up(xxxs) {
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  @include media-up(xxs) {
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  @include media-up(xs) {
+    margin-bottom: 32px;
+  }
+}
+
+// ! Medium title
+.u-h3 {
+  @extend .u-h;
+  @include fn.responsive-font-size($h3-font-size);
+
+  @include media-up(xxxs) {
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  @include media-up(xxs) {
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  @include media-up(xs) {
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+}
+
+// ! Small title
+.u-h4 {
+  @extend .u-h;
+  @include fn.responsive-font-size($h4-font-size);
+  font-weight: 400;
+
+  @include media-up(xxxs) {
+    margin-bottom: 20px;
+  }
+
+  @include media-up(xxs) {
+    margin-bottom: 20px;
+  }
+
+  @include media-up(xs) {
+    margin-bottom: 20px;
+  }
+}
+
+// ! Large subheader
+.u-subheader1 {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+// ! Small subheader
+.u-subheader2 {
+  font-size: 0.8125rem;
+  font-weight: 400;
+}

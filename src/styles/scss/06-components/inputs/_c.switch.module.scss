@@ -1,0 +1,63 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.pseudo' as *;
+@use '@styles/01-settings/settings.animations' as *;
+
+.c-switch {
+  @include flex-center-vertical;
+
+  &--disabled {
+    .c-switch__label {
+      color: var(--switch-disabled-color);
+    }
+
+    .c-switch__slider {
+      border-color: var(--switch-disabled-color);
+    }
+
+    .c-switch__thumb {
+      background-color: var(--switch-disabled-color);
+    }
+  }
+}
+
+.c-switch__label {
+  color: var(--switch-text-color);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  z-index: 100;
+}
+
+.c-switch__slider {
+  display: block;
+  width: 36px;
+  height: 16px;
+  background-color: transparent;
+  margin-right: 16px;
+  position: relative;
+  border: 1px solid var(--switch-border-color);
+  will-change: transform;
+  border-radius: 2px;
+
+  &[data-state='checked'] {
+    border: 1px solid var(--switch-selected-color);
+  }
+}
+
+.c-switch__thumb {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--switch-bg-color);
+  border-radius: 2px;
+  transition: transform 100ms;
+  will-change: transform;
+  position: absolute;
+  left: 2px;
+  top: 1px;
+
+  &[data-state='checked'] {
+    transform: translateX(19px);
+    background-color: var(--switch-selected-color);
+  }
+}

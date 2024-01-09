@@ -1,0 +1,145 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/01-settings/settings.animations' as *;
+
+.c-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-select__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  margin-bottom: 4px;
+  color: #646262;
+}
+
+.c-select__loading {
+  @include flex-center;
+}
+
+.c-select__input {
+  width: 80px;
+  height: 24px;
+  background-color: #fafafa;
+  border: 1px solid #918f8f;
+  border-left: 38px;
+  border-radius: 2px;
+  position: absolute;
+  top: 38px;
+
+  font-family: 'iranSansXNum';
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #646262;
+  overflow-x: hidden;
+  padding-right: 8px;
+}
+
+.c-select__trigger {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  height: 24px;
+  background-color: #fafafa;
+  border: 1px solid #918f8f;
+  border-radius: 2px;
+
+  &[data-state='open'] {
+    border: 1px solid #5a37c3;
+    border-radius: 2px;
+  }
+
+  & > span:nth-child(2) {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    color: #646262;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 4px;
+    font-family: 'iranSansXNum';
+  }
+}
+
+.c-select__icon {
+  i {
+    font-size: 24px;
+    color: #383535;
+  }
+}
+
+.c-select__content {
+  width: var(--radix-select-trigger-width);
+  background: #fafafa;
+  box-shadow: 0px 2px 5px rgba(145, 145, 145, 0.25);
+  border-radius: 2px;
+}
+
+.c-select__viewport {
+  padding: 12px 0;
+  direction: rtl;
+
+  &--scroll {
+    max-height: 136px;
+  }
+}
+
+.c-select__scrollbtn {
+  @include flex-center;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #d9d9d9;
+  margin: 4px 8px;
+
+  i {
+    font-size: 14px;
+    color: #383535;
+  }
+}
+
+.c-select__item {
+  @include flex-center-vertical;
+  width: 100%;
+  height: 26px;
+  padding: 6px;
+  cursor: pointer;
+  transition: background-color $button-hover-time ease-in;
+
+  // * Keyborad navigation
+  &[data-highlighted] {
+    background-color: #bdafe7;
+  }
+
+  > span {
+    font-family: 'iranSansXNum';
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    color: #646262;
+    overflow-x: hidden;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
+    > span {
+      color: #a7a5a5;
+    }
+  }
+
+  &:not(.c-select__item--disabled):hover {
+    background-color: #bdafe7;
+  }
+}

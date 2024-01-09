@@ -1,0 +1,61 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/01-settings/settings.animations' as *;
+@use '@styles/01-settings/setting.sizing' as *;
+
+.c-toggle-group {
+  @include flex-center-vertical;
+  position: relative;
+}
+
+.c-toggle-group__item {
+  @include flex-center;
+  font-family: 'iranSansXNum';
+  padding: 0 12px;
+  height: map-get($btn-height, xs);
+  border-radius: 2px;
+  background-color: transparent;
+  border: 1px solid var(--toggle-group-border-color);
+  transition: all $button-hover-time ease-in-out;
+
+  span {
+    color: var(--primary-toggle-group-text-color);
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 21px;
+
+    + i {
+      margin-left: 4px;
+      color: var(--primary-toggle-group-text-color);
+      font-size: 16px;
+    }
+  }
+
+  &--disabled {
+    border: 1px solid var(--toggle-group-disabled-border-color);
+    color: var(--toggle-group-disabled-color);
+  }
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  &:not(.c-toggle-group__item--disabled):hover {
+    background-color: var(--toggle-group-hover-bg-color);
+    border: 1px solid var(--toggle-group-hover-border-color);
+  }
+
+  &:not(.c-toggle-group__item--disabled):focus-visible {
+    background-color: var(--toggle-group-hover-bg-color);
+    border: 1px solid var(--toggle-group-hover-border-color);
+  }
+
+  &:not(.c-toggle-group__item--disabled)[data-state='on'] {
+    outline: none;
+    background-color: var(--toggle-group-selected-color);
+    border: 1px solid transparent;
+
+    span {
+      font-weight: 500;
+    }
+  }
+}

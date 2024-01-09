@@ -1,0 +1,155 @@
+// ==========================================================================
+// * Tools / functions
+// ==========================================================================
+
+// * Map Collect function
+// !Since the builtin map-merge function in Sass only take 2 arguments, it can only merge 2 maps at a time.
+/* The `map-collect` function is a custom function that takes in multiple maps as arguments and merges
+them into a single map. It does this by initializing an empty map called ``, and then
+using a `@each` loop to iterate over each map passed as an argument. Within the loop, it uses the
+`map-merge` function to merge the current map with the `` map, and then assigns the
+result back to ``. Finally, it returns the merged `` map. This function allows
+for cleaner and more efficient merging of multiple maps in Sass. */
+@function map-collect($maps...) {
+  $collection: ();
+
+  @each $map in $maps {
+    $collection: map-merge($collection, $map);
+  }
+  @return $collection;
+}
+
+// * Converts the given pixel value to its REM equivalent.
+// @param  {Number} $size                     - The pixel value to convert.
+// @param  {Number} $base [$font-size] - The assumed base font size.
+// @return {Number} Scalable pixel value in REMs.
+/* The `@function rem(, : -font-size)` is a Sass function that converts a given pixel
+value to its REM equivalent. It takes two parameters: ``, which is the pixel value to convert,
+and ``, which is the assumed base font size and has a default value of `-font-size`. */
+@function rem($size, $base: $global-font-size) {
+  @if (type-of($size) == number) {
+    @if (unit($size) != 'px') {
+      @error "`#{$size}` needs to be a pixel value.";
+    }
+  } @else {
+    @error "`#{$size}` needs to be a number.";
+  }
+
+  @if (type-of($base) == number) {
+    @if (unit($base) != 'px') {
+      @error "`#{$base}` needs to be a pixel value.";
+    }
+  } @else {
+    @error "`#{$base}` needs to be a number.";
+  }
+
+  @return ($size / $base) * 1rem;
+}
+
+// Checks if a list contains a value(s).
+// @param  {List} $list   - The list to check against.
+// @param  {List} $values - A single value or list of values to check for.
+// @return {Boolean}
+// @access private
+/* The `@function list-contains(, ...)` is a Sass function that checks if a given list
+contains one or more specified values. It takes two parameters: ``, which is the list to check
+against, and ``, which is a single value or a list of values to check for. */
+@function list-contains($list, $values...) {
+  @each $value in $values {
+    @if type-of(index($list, $value)) != 'number' {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+// It prefixes the keys with `n` and makes the value negative.
+/* The `@function negativify-map()` is a Sass function that takes in a map as an argument and
+returns a new map with the same keys as the original map, but with negative values. It does this by
+initializing an empty map called ``, and then using a `@each` loop to iterate over each
+key-value pair in the original map. Within the loop, it checks if the key is not equal to 0, and if
+so, it uses the `map-merge` function to merge a new map with a key that is the original key with a
+prefix of 'n' and a value that is the negative of the original value. The resulting map is then
+returned. This function is useful for creating a map of negative values for use in CSS transforms or
+other similar situations. */
+@function negativify-map($map) {
+  $result: ();
+
+  @each $key, $value in $map {
+    @if $key != 0 {
+      $result: map-merge($result, ('n' + $key: (-$value)));
+    }
+  }
+  @return $result;
+}
+
+/* The `@function str-replace()` is a Sass function that takes in three arguments: ``,
+``, and ``. It searches for all occurrences of `` within `` and
+replaces them with ``. If `` is not provided, it defaults to an empty string. The
+function uses the `str-index()` function to find the index of the first occurrence of ``
+within ``. If `` is found, the function uses `str-slice()` to extract the portion of
+`` before the first occurrence of ``, concatenates it with ``, and then
+recursively calls itself with the remaining portion of `` after the first occurrence of
+``. This process continues until all occurrences of `` have been replaced with
+``. If `` is not found, the original `` is returned. */
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+/* The `@function divide()` is a Sass function that takes in three arguments: ``, ``,
+and ``. It performs division between `` and `` and returns the result.
+The `` argument specifies the number of decimal places to round the result to. The
+function first determines the sign of the result based on the signs of the dividend and divisor. It
+then takes the absolute values of the dividend and divisor and performs long division to calculate
+the result. The function also handles cases where the dividend or divisor is 0 and throws an error
+in such cases. The function also handles cases where the dividend and divisor have different units
+and converts the result to the appropriate unit if necessary. */
+@function divide($dividend, $divisor, $precision: 10) {
+  $sign: if($dividend > 0 and $divisor > 0 or $dividend < 0 and $divisor < 0, 1, -1);
+  $dividend: abs($dividend);
+  $divisor: abs($divisor);
+  @if $dividend == 0 {
+    @return 0;
+  }
+  @if $divisor == 0 {
+    @error "Cannot divide by 0";
+  }
+  $remainder: $dividend;
+  $result: 0;
+  $factor: 10;
+  @while ($remainder > 0 and $precision >= 0) {
+    $quotient: 0;
+    @while ($remainder >= $divisor) {
+      $remainder: $remainder - $divisor;
+      $quotient: $quotient + 1;
+    }
+    $result: $result * 10 + $quotient;
+    $factor: $factor * 0.1;
+    $remainder: $remainder * 10;
+    $precision: $precision - 1;
+    @if ($precision < 0 and $remainder >= $divisor * 5) {
+      $result: $result + 1;
+    }
+  }
+  $result: $result * $factor * $sign;
+  $dividend-unit: unit($dividend);
+  $divisor-unit: unit($divisor);
+  $unit-map: (
+    'px': 1px,
+    'rem': 1rem,
+    'em': 1em,
+    '%': 1%,
+  );
+  @if ($dividend-unit != $divisor-unit and map-has-key($unit-map, $dividend-unit)) {
+    $result: $result * map-get($unit-map, $dividend-unit);
+  }
+  @return $result;
+}

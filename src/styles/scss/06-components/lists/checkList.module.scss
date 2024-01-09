@@ -1,0 +1,173 @@
+@use '@styles/02-tools/tools.flex' as *;
+@use '@styles/02-tools/tools.breakpoint' as *;
+@use '@styles/02-tools/tools.pseudo' as fn;
+
+.c-check-list {
+  @include media-up(sm) {
+    border: 1px solid var(--check-list-border);
+    border-radius: 2px;
+
+    &--error {
+      border: 1px solid var(--warning-st-color);
+      box-shadow: var(--check-list-shadow-error);
+    }
+  }
+}
+
+.c-check-list__item {
+  @include flex-center-vertical;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  border: 1px solid var(--check-list-border);
+  box-shadow: var(--check-list-item-shadow);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include fn.pseudo(after, 24px, 24px, 50%, 12px, null, null, true, '') {
+    transform: translateY(-50%);
+    border-radius: 2px;
+    border: 2px solid var(--check-list-item-tick-border);
+  }
+
+  &[data-state='checked'] {
+    border: 1px solid var(--success-st-color);
+    box-shadow: var(--check-list-item-selected-shadow);
+
+    &::after {
+      background-color: var(--success-st-color);
+      border: 2px solid transparent;
+    }
+
+    .c-check-list__content {
+      > i {
+        color: var(--success-st-color);
+      }
+    }
+  }
+
+  &:focus-visible {
+    border: 1px solid var(--success-st-color);
+    outline: none;
+  }
+
+  &--primary {
+    &[disabled] {
+      cursor: not-allowed;
+      border: 1px solid var(--check-list-item-disabled-tick-border);
+
+      p,
+      i,
+      &::after {
+        color: var(--check-list-text-muted);
+        border-color: var(--check-list-border);
+      }
+    }
+  }
+
+  &--secondary {
+    &[data-state='checked'] {
+      .c-check-list__content-info {
+        color: #f43b86;
+      }
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    border: 1px solid var(--check-list-border);
+
+    p,
+    h6,
+    span,
+    &::after {
+      color: var(--check-list-text-muted);
+      border-color: var(--check-list-border);
+    }
+  }
+}
+
+.c-check-list__content {
+  @include flex-center-vertical;
+  width: calc(100% - 24px - 16px);
+
+  &--primary {
+    > i {
+      margin-left: 20px;
+      font-size: 24px;
+      color: var(--check-list-item-primary-icon);
+    }
+
+    .c-check-list__content-description {
+      font-weight: 500;
+      color: var(--check-list-item-primary-text);
+
+      @include media-up(xxs) {
+        font-size: 12px;
+        line-height: 17px;
+      }
+
+      @include media-up(sm) {
+        font-size: 14px;
+        line-height: 19px;
+      }
+    }
+  }
+
+  &--secondary {
+    .c-check-list__content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .c-check-list__content-title {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: var(--check-list-item-secondary-title);
+    }
+
+    .c-check-list__content-description {
+      font-family: 'iranSansXNum', sans-serif;
+      width: 100%;
+      text-align: right;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+      color: var(--check-list-item-secondary-text);
+      margin: 8px 0 12px 0;
+    }
+
+    .c-check-list__content-info {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: var(--check-list-item-secondary-text);
+    }
+  }
+}
+
+.c-check-list__content-description {
+  width: 100%;
+  text-align: right;
+}
+
+.c-check-list__indicator {
+  @include flex-center;
+  height: 24px;
+  width: 24px;
+  border-radius: 2px;
+
+  i {
+    font-size: 24px;
+    position: relative;
+    z-index: 100;
+    color: var(--white);
+  }
+}

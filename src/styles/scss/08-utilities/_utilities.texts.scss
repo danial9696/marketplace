@@ -1,0 +1,36 @@
+// ==========================================================================
+// * Utilities / Headings
+// ==========================================================================
+
+/* These classes can be applied to HTML elements to quickly and consistently style
+headings throughout a website or application. The exclamation mark before each comment is a
+convention used to indicate that these are important or noteworthy styles. */
+// ! Large product
+.u-p1 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+// ! Medium product
+.u-p2 {
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+// ! Small product
+.u-p3 {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+// ! Large detail
+.u-detail1 {
+  font-size: 0.625rem;
+  font-weight: 400;
+}
+
+// ! Medium detail
+.u-detail2 {
+  font-size: 0.5rem;
+  font-weight: 300;
+}

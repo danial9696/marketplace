@@ -1,0 +1,24 @@
+// ========================================================================
+// * Hidden Visually
+//   ======================================================================== */
+
+// Mixin to quickly apply accessible hiding to elements.
+/* The `@mixin hidden-visually()` is a SCSS mixin that applies styles to an element to visually hide it
+from the user while still making it accessible to screen readers and other assistive technologies.
+The styles include setting the border to 0, clipping the element to a 0x0 rectangle, setting the
+height and width to 1px, setting the margin to -1px, setting the overflow to hidden, setting the
+padding to 0, setting the position to absolute, and setting the white-space to nowrap. The
+`!important` keyword is used to ensure that these styles take precedence over any other styles that
+may be applied to the element. */
+@mixin hidden-visually() {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}

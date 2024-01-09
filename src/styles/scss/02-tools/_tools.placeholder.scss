@@ -1,0 +1,35 @@
+// ========================================================================
+// * Placeholders Tools
+//   ======================================================================== */
+
+// * Placeholder mixin for set prefixes
+/* The `@mixin optional-at-root()` is a Sass mixin that takes a selector as an argument. It is used
+to generate CSS rules that are optionally wrapped in an `@at-root` directive. */
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+/* The `@mixin placeholder` is defining a Sass mixin that generates CSS rules for styling input
+placeholders in different browsers. It uses the `@mixin optional-at-root()` to generate CSS rules
+that are optionally wrapped in an `@at-root` directive, and includes it for each browser-specific
+selector. The `@content` directive is used to include any styles passed in as arguments when the
+mixin is called. */
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
