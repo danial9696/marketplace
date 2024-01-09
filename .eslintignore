@@ -1,0 +1,23 @@
+# Ignore stories tsx
+*.stories.tsx
+*.story.tsx
+
+# Ignore stories jsx
+*.stories.jsx
+*.story.jsx
+
+# Ignore stories js
+*.stories.js
+*.story.js
+
+#Ignore next config
+next.config.js
+
+#Ignore commitlint config
+commitlint.config.js
+
+# Css & Scss files
+*.scss
+*.css
+*.scss.module
+

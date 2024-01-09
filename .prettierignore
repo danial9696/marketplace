@@ -1,0 +1,12 @@
+node_modules
+.next
+.husky
+
+#Storybook mdx stories
+.stories.mdx
+.stories.tsx
+
+# Ignore artifacts:
+package-lock.json
+build
+coverage

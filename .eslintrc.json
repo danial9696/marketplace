@@ -1,0 +1,62 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-base",
+    "airbnb-typescript",
+    "prettier",
+    "plugin:storybook/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    // suppress errors for not destructuring props
+    "react/destructuring-assignment": "off",
+    // allow jsx syntax in js files (for next.js project)
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ], //should add ".ts" if typescript project
+    // This rule is used to warn or error when importing a package that is not listed as a dependency
+    // in the project's package.json file. In this specific configuration, it is set to warn and allows
+    // for the specified devDependencies (files with `.stories.` and files in the `.storybook`
+    // directory) and peerDependencies to be imported without triggering a warning. This helps ensure
+    // that the project's dependencies are properly listed and managed.
+    "import/no-extraneous-dependencies": [
+      "warn",
+      {
+        "devDependencies": [
+          "**/*.stories.*",
+          "**/.storybook/**/*.*"
+        ],
+        "peerDependencies": true
+      }
+    ]
+  },
+  // * Handle barrel export pattern
+  // The `"overrides"` section is used to override specific rules for certain files or groups of files.
+  // In this case, it is targeting all `index.ts` files within the `src` directory and its
+  // subdirectories. It is turning off the `"no-restricted-exports"` rule for these files, which means
+  // that these files can export any variable or function, even if it is not explicitly listed in the
+  // file. This override is likely added to allow for more flexibility in the way components are
+  // exported and used within the project.
+  "overrides": [
+    {
+      "files": [
+        "./src/components/*/**/index.ts"
+      ],
+      "rules": {
+        "no-restricted-exports": "off"
+      }
+    }
+  ]
+}

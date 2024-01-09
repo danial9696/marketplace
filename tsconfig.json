@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "importHelpers": true,
+
+    // The `baseUrl` property in the `compilerOptions` object is used to specify the base directory for
+    // resolving non-relative module names. In this specific example, the `baseUrl` is set to `"."`, which
+    // means that the base directory for resolving module names is the current directory. This allows for
+    // easier and more concise importing of modules in the project, as the module names can be specified
+    // relative to the `baseUrl`. For example, instead of writing `import Button from
+    // '../../components/Button'`, you can write `import Button from '@components/Button'` because the
+    // `@components` alias is defined in the `paths` property relative to the `baseUrl`.
+    "baseUrl": ".",
+    // The `paths` property in the `compilerOptions` object is used to define aliases for module paths.
+    // In this specific example, it is defining aliases for commonly used directories in the project.
+    // For example, `@public` is an alias for the `./public` directory, and `@components` is an alias
+    // for the `./src/components` directory. This allows for easier and more concise importing of
+    // modules in the project. For instance, instead of writing `import Button from
+    // '../../components/Button'`, you can write `import Button from '@components/Button'`.
+    "paths": {
+      "@public": ["./public"],
+      "@public/*": ["./public/*"],
+      "@styles": ["./src/styles/scss"],
+      "@styles/*": ["./src/styles/scss/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@lib": ["./src/lib"],
+      "@lib/*": ["./src/lib/*"],
+      "@api": ["./src/api"],
+      "@api/*": ["./src/api/*"],
+      "@const": ["./src/constants"],
+      "@const/*": ["./src/constants/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "commitlint.config.js"],
+  "exclude": ["node_modules"]
+}
